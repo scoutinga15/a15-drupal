@@ -1,0 +1,53 @@
+name: SCSS droopler_a15 for Droopler
+type: theme
+description: 'Copy this theme and make your own. This is a simple starter kit for you. Read the instructions in README.md before you start.'
+version: 8.x-2.0
+core_version_requirement: ^8 || ^9
+
+base theme: droopler_theme
+
+libraries:
+  - droopler_a15/child-styling
+  - droopler_a15/child-scripts
+## Uncomment this to enable Font Awesome support.
+## Look into droopler_a15.libraries.yml too.
+#  - droopler_a15/font-awesome
+
+# Comment the following overrides if you are using pure CSS.
+# If uncommented global styling of base theme will be replaced.
+# Libraries will respect your subtheme variables.
+libraries-override:
+  droopler_theme/global-styling: droopler_a15/child-styling
+  droopler_theme/dropbutton: droopler_a15/dropbutton
+  droopler_theme/file: droopler_a15/file
+  droopler_theme/maintenance_page: droopler_a15/maintenance_page
+
+regions:
+  header: Header
+  secondary_menu: 'Secondary menu'
+  primary_menu: 'Primary menu'
+  lang_menu: 'Language menu'
+  page_top_content: 'Page top'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  page_bottom_content: 'Page bottom'
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  breadcrumb: Breadcrumb
+  admin_tabs: 'Admin tabs'
+  content: Content
+  facets_top: 'Facets top'
+  facets_left_top: 'Facets left top'
+  facets_left: 'Facets left'
+  sidebar_left: 'Sidebar left'
+  sidebar_right: 'Sidebar right'
+  featured_bottom_first: 'Featured bottom first'
+  featured_bottom_second: 'Featured bottom second'
+  featured_bottom_third: 'Featured bottom third'
+  footer_main: 'Footer main'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_fourth: 'Footer fourth'
+  footer_fifth: 'Footer fifth'
+  footer_sixth: 'Footer sixth'
