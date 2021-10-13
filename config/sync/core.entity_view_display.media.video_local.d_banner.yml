@@ -1,0 +1,35 @@
+uuid: da7659a8-f429-4049-ad0b-f21ec047fe2d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.d_banner
+    - field.field.media.video_local.field_media_file
+    - media.type.video_local
+  module:
+    - file
+id: media.video_local.d_banner
+targetEntityType: media
+bundle: video_local
+mode: d_banner
+content:
+  field_media_file:
+    type: file_video
+    label: visually_hidden
+    weight: 0
+    settings:
+      autoplay: true
+      multiple_file_display_type: tags
+      muted: true
+      width: 1800
+      height: 800
+      controls: false
+      loop: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

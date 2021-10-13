@@ -1,0 +1,28 @@
+uuid: b7a1e728-7cbf-44c0-8b0d-7c880d3e04a6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.video_local.field_media_file
+    - media.type.video_local
+id: media.video_local.media_library
+targetEntityType: media
+bundle: video_local
+mode: media_library
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_media_file: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

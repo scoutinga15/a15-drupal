@@ -1,0 +1,22 @@
+uuid: 61ca3cb8-99ac-4ae3-a5e0-b17828996e90
+langcode: nl
+status: true
+dependencies:
+  module:
+    - we_megamenu
+  theme:
+    - droopler_theme
+_core:
+  default_config_hash: x63iAYw83VaAiwkgBhoeBcpGENMfMU5Ma8pziCtiruk
+id: mainnavigation_2
+theme: droopler_theme
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'we_megamenu_block:main'
+settings:
+  id: 'we_megamenu_block:main'
+  label: 'MegaMenu Main navigation'
+  provider: we_megamenu
+  label_display: '0'
+visibility: {  }

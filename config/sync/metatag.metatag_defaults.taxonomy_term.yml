@@ -1,0 +1,12 @@
+uuid: 755cb060-da12-497a-85ee-0512ae682875
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 92bXZdyYJ5xqukdfmGRr_CYcwm1vfuS8b8aJ7X_G7E0
+id: taxonomy_term
+label: Taxonomieterm
+tags:
+  canonical_url: '[term:url]'
+  description: '[term:description]'
+  title: '[term:name] | [site:name]'

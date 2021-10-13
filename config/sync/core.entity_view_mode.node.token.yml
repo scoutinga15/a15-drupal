@@ -1,0 +1,12 @@
+uuid: f047227b-efb0-45a0-9643-4325466ab9ea
+langcode: nl
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: vIX64lRX14_lPePewHfWVFSyTfJt0Yh-Lja05UgP8N0
+id: node.token
+label: Token
+targetEntityType: node
+cache: true

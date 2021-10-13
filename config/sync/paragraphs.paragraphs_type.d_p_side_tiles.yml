@@ -1,0 +1,12 @@
+uuid: 7b659fd5-975d-4ff1-a41c-ca8ebd16c7ca
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: PxdWcvQUS9YrzrgCCXAVWUJdirpdHqgP7jHue1rRypg
+id: d_p_side_tiles
+label: 'Sidebar tiles'
+icon_uuid: null
+icon_default: null
+description: 'Gallery of tiles on one side, text on the other side.'
+behavior_plugins: {  }

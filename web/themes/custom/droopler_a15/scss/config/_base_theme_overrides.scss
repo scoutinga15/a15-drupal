@@ -1,5 +1,6 @@
 $color-a15-blue: #0066B2;
 $color-a15-green: #00A551;
+$color-a15-orange: orange;
 
 // Base theme overrides - variables that you can modify.
 
@@ -186,6 +187,7 @@ $footer-background: $color-a15-blue;
 // $submenu-link-color: $menu-main-link-color; // Submenu item text color
 // $submenu-link-hover-color: darken($color-priam, 20%); // Submenu item hover color
 $submenu-link-hover-background: $color-a15-blue; // Submenu item hover color
+$secondary-menu-link-colors: $color-a15-orange;
 // $menu-mobile-background: $color-agamemnon;
 // $menu-mobile-link-color: $color-odysseus;
 // $menu-mobile-link-border: $color-menelaus;
@@ -419,8 +421,9 @@ $d-p-banner-mobile-padding-bottom: 4.25rem;
 // $d-p-carousel-item-line-color: $color-agamemnon;
 // $d-p-carousel-item-line-color-inverted: $color-nestor;
 $d-p-carousel-line-color: $color-a15-green;
+$bottom-footer-background-color: $color-a15-green;
 $d-p-carousel-line-color-inverted: $color-nestor;
-// $d-p-carousel-arrow-color: $color-cassandra;
+$d-p-carousel-arrow-color: $color-a15-orange;
 // $d-p-carousel-background-theme-invert: $color-agamemnon;
 // $d-p-carousel-theme-invert-text-color: $color-odysseus;
 // $d-p-carousel-items-margin-top: 2%;

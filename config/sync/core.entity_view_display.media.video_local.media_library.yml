@@ -1,0 +1,35 @@
+uuid: 554fdfa9-7a64-411f-8a08-9e0bd3059e7e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.video_local.field_media_file
+    - image.style.medium
+    - media.type.video_local
+  module:
+    - svg_image
+id: media.video_local.media_library
+targetEntityType: media
+bundle: video_local
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_style: medium
+      image_link: ''
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_media_file: true
+  langcode: true
+  name: true
+  uid: true

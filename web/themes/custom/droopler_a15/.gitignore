@@ -1,5 +1,5 @@
 # Comment these lines if you want to keep CSS and JS in the repository.
-css/*
+css/maps
 !css/.gitkeep
 js/min/*
 !js/min/.gitkeep

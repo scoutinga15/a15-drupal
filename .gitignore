@@ -10,7 +10,6 @@
 !/web/profiles/custom
 /web/libraries/
 /web/.*
-/config
 /web/*.php
 /web/web.config
 /web/robots.txt
@@ -35,3 +34,7 @@ drupal_config
 # Tome
 /content
 /files
+
+.env
+*.sql
+*.sql.gz

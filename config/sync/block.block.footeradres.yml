@@ -1,0 +1,25 @@
+uuid: 1db99551-8dd4-4b06-bca5-fa32e730adbb
+langcode: nl
+status: true
+dependencies:
+  content:
+    - 'block_content:content_block:87617313-355b-4b7d-a10b-614079ce4f5f'
+  module:
+    - block_content
+  theme:
+    - droopler_a15
+id: footeradres
+theme: droopler_a15
+region: footer_second
+weight: 0
+provider: null
+plugin: 'block_content:87617313-355b-4b7d-a10b-614079ce4f5f'
+settings:
+  id: 'block_content:87617313-355b-4b7d-a10b-614079ce4f5f'
+  label: 'Footer adres'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

@@ -1,0 +1,12 @@
+uuid: 3c20b3b2-bb3c-4a9d-af47-346a0b64f8d0
+langcode: nl
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: 4bWYX7aQyveXIE-cBSeWwmAlN0Q_p5b_1Ml88xlMniM
+id: media.token
+label: Token
+targetEntityType: media
+cache: true

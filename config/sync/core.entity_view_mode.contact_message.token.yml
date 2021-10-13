@@ -1,0 +1,10 @@
+uuid: dc587f30-210c-4910-91fc-762059141164
+langcode: nl
+status: true
+dependencies:
+  module:
+    - contact
+id: contact_message.token
+label: Token
+targetEntityType: contact_message
+cache: true

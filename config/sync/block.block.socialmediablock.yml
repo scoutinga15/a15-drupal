@@ -1,0 +1,20 @@
+uuid: 48384ebc-0fdb-47a0-909d-cd6f8f3d9e8b
+langcode: nl
+status: true
+dependencies:
+  module:
+    - d_social_media
+  theme:
+    - droopler_a15
+id: socialmediablock
+theme: droopler_a15
+region: footer_first
+weight: -4
+provider: null
+plugin: social_media_block
+settings:
+  id: social_media_block
+  label: 'Onze socials'
+  provider: d_social_media
+  label_display: visible
+visibility: {  }

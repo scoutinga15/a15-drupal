@@ -1,0 +1,12 @@
+uuid: b517c366-f70c-4a40-9b38-343a862e245e
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: n9shmj1leHvu6rGZOHF58GvAtmVE0g8Eo8MjJjoPqX0
+id: d_p_gallery
+label: Album
+icon_uuid: null
+icon_default: null
+description: 'Simple gallery paragraph with Colorbox support and no pagination.'
+behavior_plugins: {  }

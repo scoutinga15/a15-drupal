@@ -1,0 +1,29 @@
+uuid: 28fa2b61-7479-409f-8e2d-57ca891d4cff
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_file
+    - media.type.d_document
+  module:
+    - file
+_core:
+  default_config_hash: m4HQ0FoaiNti4TGwsJF3K0wxrX9qVG7ylcvxjKBsnQ8
+id: media.d_document.field_media_file
+field_name: field_media_file
+entity_type: media
+bundle: d_document
+label: Bestand
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: 'documents/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt doc docx pdf'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

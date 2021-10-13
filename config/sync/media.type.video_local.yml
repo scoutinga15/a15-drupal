@@ -1,0 +1,14 @@
+uuid: 9d205d1b-817f-425f-9f8d-2e02bb4578aa
+langcode: nl
+status: true
+dependencies: {  }
+id: video_local
+label: 'Local video'
+description: ''
+source: video_file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_file
+field_map:
+  name: name

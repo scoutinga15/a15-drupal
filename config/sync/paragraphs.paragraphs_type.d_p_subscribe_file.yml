@@ -1,0 +1,12 @@
+uuid: d613955f-dbf3-4055-a934-a65e9a9013b8
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: u9dszNrGY1riKsabdzWm9R3IYk66coH0o-NcBaQX_AQ
+id: d_p_subscribe_file
+label: 'Subscribe for file'
+icon_uuid: null
+icon_default: null
+description: 'A form that allows users to sign up for a file.'
+behavior_plugins: {  }

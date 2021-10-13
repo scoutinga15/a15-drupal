@@ -24,3 +24,11 @@
     display: none;
   }
 }
+
+.paragraph {
+  .content > .field--name-field-d-main-title, .d-p-carousel-item .field--name-field-d-main-title {
+    &::after {
+      display: none;
+    }
+  }
+}

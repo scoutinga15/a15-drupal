@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  drupal:
+    build:
+      context: .
+    environment:
+      DRUPAL_DB_DATABASE: ${DRUPAL_DB_DATABASE}
+      DRUPAL_DB_USER: ${DRUPAL_DB_USER}
+      DRUPAL_DB_PASSWORD: ${DRUPAL_DB_PASSWORD}
+      DRUPAL_DB_HOST: ${DRUPAL_DB_HOST}
+      DRUPAL_DB_PORT: ${DRUPAL_DB_PORT}
+      VIRTUAL_HOST: nieuw.scoutinga15.nl
+      LETSENCRYPT_HOST: nieuw.scoutinga15.nl
+    restart: always
+    ports:
+      - "3000:80"
+    volumes:
+      - "${DRUPAL_FILES_PUBLIC}:/opt/drupal/web/sites/default/files"

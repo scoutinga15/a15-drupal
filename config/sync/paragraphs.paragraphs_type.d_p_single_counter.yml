@@ -1,0 +1,12 @@
+uuid: 3b3b8128-a1cc-4fb4-864e-d17a2fbb5359
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: p7cFH2kc801eeBJj0pgQUmDc1HS33uX2OQdUi3bVqB8
+id: d_p_single_counter
+label: 'Single counter'
+icon_uuid: null
+icon_default: null
+description: 'Single counter block used in "Counters" paragraph.'
+behavior_plugins: {  }

@@ -1,0 +1,35 @@
+uuid: d4e56afb-8e7b-4980-8266-cae760b99df4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.media.video_local.field_media_file
+    - media.type.video_local
+  module:
+    - file
+id: media.video_local.default
+targetEntityType: media
+bundle: video_local
+mode: default
+content:
+  field_media_file:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

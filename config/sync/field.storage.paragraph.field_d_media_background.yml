@@ -1,0 +1,22 @@
+uuid: ca563158-1289-493d-a367-86ac2c9bc051
+langcode: nl
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+_core:
+  default_config_hash: ekCn9Mda2KDPCR5eiD7MJBGDiGWZeVx4M6yMfpkMOE0
+id: paragraph.field_d_media_background
+field_name: field_d_media_background
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

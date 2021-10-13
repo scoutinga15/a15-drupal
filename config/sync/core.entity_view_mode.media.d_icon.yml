@@ -1,0 +1,12 @@
+uuid: 8b8b6847-4b0b-42f4-8233-e2f9cece98cc
+langcode: nl
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: VBqZGW4EtxYklZNwH1auE6svc9Du7EUaDe4Kv3Xp7QQ
+id: media.d_icon
+label: Pictogram
+targetEntityType: media
+cache: true

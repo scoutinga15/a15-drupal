@@ -1,0 +1,27 @@
+uuid: 464c42c4-76c9-42d4-84ef-915e86ab485a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_file
+    - media.type.video_local
+  module:
+    - file
+id: media.video_local.field_media_file
+field_name: field_media_file
+entity_type: media
+bundle: video_local
+label: Filmbestand
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'mp4 mpeg mpg'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

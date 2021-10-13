@@ -1,0 +1,12 @@
+uuid: c3a32327-5389-42dd-b244-0223ff46e6ec
+langcode: nl
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: Zy8W_v5hcVkm_IHGbJjooCTugwG8vdjqQFWatnWJHSQ
+id: node.d_header
+label: Kop
+targetEntityType: node
+cache: true

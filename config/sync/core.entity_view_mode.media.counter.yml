@@ -1,0 +1,12 @@
+uuid: 501253dc-6eeb-4f23-9518-30060829ef35
+langcode: nl
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: aqSMz0JpOm4rS_N_fWjnJvWMZrQu9Pcs35LJ92TbGrw
+id: media.counter
+label: Teller
+targetEntityType: media
+cache: true

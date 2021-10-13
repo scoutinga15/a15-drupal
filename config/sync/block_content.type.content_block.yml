@@ -1,0 +1,10 @@
+uuid: b4a32092-ccf8-4a21-afa3-22025c26bd61
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 3wpuRoK1iXv6PjnJ4bZyMTqA34XEU099P8QV-LGF3Ds
+id: content_block
+label: 'Content block'
+revision: 0
+description: ''

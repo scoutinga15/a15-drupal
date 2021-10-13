@@ -1,0 +1,13 @@
+uuid: ebdf7ed0-8bea-4191-bb09-e8ad899a62c4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - media.type.d_document
+_core:
+  default_config_hash: BH113OYbR7Zn-zMgmAKr848hIjCExDkA3WgEs4qlsbk
+id: media.d_document
+target_entity_type_id: media
+target_bundle: d_document
+default_langcode: site_default
+language_alterable: false

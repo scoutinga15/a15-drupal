@@ -102,3 +102,19 @@ docker run --detach \
     nginxproxy/acme-companion
 ```
 
+Drupal
+```shell
+docker run --detach \
+    --name drupal \
+    --env "VIRTUAL_HOST=nieuw.scoutinga15.nl" \
+    --env "LETSENCRYPT_HOST=nieuw.scoutinga15.nl" \
+    drupal
+```
+
+Volumes
+- assets
+- modules
+- profiles
+- themes
+
+`scp -rp files root@159.65.196.174:/mnt/volume_ams3_01/a15/drupal-files `

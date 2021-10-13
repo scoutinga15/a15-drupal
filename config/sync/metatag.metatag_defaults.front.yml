@@ -1,0 +1,11 @@
+uuid: a0ef22d3-dd88-4e3f-b89c-1e5dc8a8c40b
+langcode: nl
+status: false
+dependencies: {  }
+_core:
+  default_config_hash: GCxIH5xTUwVsb4Vo-JDmUHcq-Ye7ds-NYKw9tRDMLYA
+id: front
+label: Voorpagina
+tags:
+  canonical_url: '[site:url]'
+  shortlink: '[site:url]'

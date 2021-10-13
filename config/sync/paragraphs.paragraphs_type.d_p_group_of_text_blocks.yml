@@ -1,0 +1,12 @@
+uuid: cc981e90-9f55-4892-aeac-227a6b59d224
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: h0cYmk9JNXRA796PCaPLDkNqU4Pt6ft84TGBKI7AWKU
+id: d_p_group_of_text_blocks
+label: 'Group of text blocks'
+icon_uuid: null
+icon_default: null
+description: 'Group of text blocks or nodes.'
+behavior_plugins: {  }

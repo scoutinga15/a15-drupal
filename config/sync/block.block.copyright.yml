@@ -1,0 +1,25 @@
+uuid: 88c32bee-a62c-4a2f-977e-ef7b3b052917
+langcode: nl
+status: true
+dependencies:
+  content:
+    - 'block_content:content_block:ef3beeb3-ce71-4916-b515-83a109041c95'
+  module:
+    - block_content
+  theme:
+    - droopler_a15
+id: copyright
+theme: droopler_a15
+region: footer_main
+weight: 0
+provider: null
+plugin: 'block_content:ef3beeb3-ce71-4916-b515-83a109041c95'
+settings:
+  id: 'block_content:ef3beeb3-ce71-4916-b515-83a109041c95'
+  label: Copyright
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

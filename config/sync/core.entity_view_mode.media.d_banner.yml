@@ -1,0 +1,12 @@
+uuid: fde26733-55f4-445c-9771-2ec38f1d50dc
+langcode: nl
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: zSzOcryBG_zeNT11nyZE0iOUVGBoaIVBgd03CgwNLso
+id: media.d_banner
+label: Banner
+targetEntityType: media
+cache: true

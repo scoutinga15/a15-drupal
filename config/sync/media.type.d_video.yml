@@ -1,0 +1,20 @@
+uuid: c2b4d793-60a3-40a7-a274-1059501e4e49
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: GYokt_Bs_zNLtrVZqILF5PfV33jVGusZcF1wwOBz8zw
+id: d_video
+label: Video
+description: 'A video added from YouTube or Vimeo.'
+source: 'oembed:video'
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  thumbnails_directory: 'public://media/video/thumbnails'
+  providers:
+    - YouTube
+    - Vimeo
+  source_field: field_media_oembed_video
+field_map:
+  title: name

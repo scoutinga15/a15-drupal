@@ -1,0 +1,16 @@
+uuid: b1736edd-0291-4704-94fa-4d2e45b74d08
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: fwlCA2QxPCZEMTrGL_OgarR2eWFXIds1afP4kyiCisE
+id: d_image
+label: Afbeelding
+description: 'A simple image added from a file.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image
+field_map:
+  name: name

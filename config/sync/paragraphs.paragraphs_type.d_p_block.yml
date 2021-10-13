@@ -1,0 +1,12 @@
+uuid: 8c15243c-d361-4f70-894e-b1bf064f9dc6
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: xnGYYerCR7c78zdXOlveGCxtjwq9tiWEbOdjcPVXs6Q
+id: d_p_block
+label: 'Block paragraph'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -798,7 +798,22 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
  *
  * Keep this code block at the end of this file to take full effect.
  */
-#
+
+$databases['default']['default'] = array (
+  'database' => getenv('DRUPAL_DB_DATABASE'),
+  'username' => getenv('DRUPAL_DB_USER'),
+  'password' => getenv('DRUPAL_DB_PASSWORD'),
+  'prefix' => '',
+  'host' => getenv('DRUPAL_DB_HOST'),
+  'port' => getenv('DRUPAL_DB_PORT'),
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+
+$settings['config_sync_directory'] = '../config/sync';
+
+$settings['tome_static_directory'] = '../html';
+
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }

@@ -1,0 +1,20 @@
+uuid: 390750ec-3db3-4584-bb6a-3420d7560f60
+langcode: nl
+status: true
+dependencies:
+  theme:
+    - droopler_theme
+_core:
+  default_config_hash: SgkWQaEfrYQcRQIrp6D5ZlZG9I05sv8xypakOwoHmuU
+id: pagetitle
+theme: droopler_theme
+region: content
+weight: -2
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: Paginatitel
+  provider: core
+  label_display: '0'
+visibility: {  }
