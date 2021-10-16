@@ -4,7 +4,7 @@ namespace Deployer;
 require 'recipe/drupal8.php';
 
 // Project name
-set('application', 'my_project');
+set('application', 'a15-drupal');
 
 // Project repository
 set('repository', 'git@github.com:scoutinga15/a15-drupal.git');
@@ -13,23 +13,61 @@ set('repository', 'git@github.com:scoutinga15/a15-drupal.git');
 set('git_tty', true);
 
 // Shared files/dirs between deploys
-add('shared_files', []);
-add('shared_dirs', []);
+add('shared_files', [
+  '.env'
+]);
+add('shared_dirs', [
+  'web/sites/default/files'
+]);
 
 // Writable dirs by web server
-add('writable_dirs', []);
+add('writable_dirs', [
+  'config',
+  'web/sites/default/files',
+  'web/themes',
+  'web/modules',
+]);
 
 
 // Hosts
 
-host('project.com')
-    ->set('deploy_path', '~/{{application}}');
+host('159.65.196.174')
+  ->user('root')
+  ->port(22)
+  ->forwardAgent(true)
+  ->multiplexing(true)
+  ->addSshOption('UserKnownHostsFile', '/dev/null')
+  ->addSshOption('StrictHostKeyChecking', 'no')
+  ->set('deploy_path', '/mnt/volume_ams3_01/a15')
+  ->set('writable_mode', 'chmod');
 
 // Tasks
-
-task('build', function () {
-    run('cd {{release_path}} && build');
+task('drush:cr', function () {
+    run('cd {{release_path}} && drush cr');
 });
+
+task('drush:cim', function () {
+  run('cd {{release_path}} && drush cim -y');
+});
+
+task ('dc:build', function () {
+  run('cd {{release_path}} && docker-compose -pa15 build');
+});
+
+task ('dc:up', function () {
+  run('cd {{release_path}} && docker-compose -pa15 up -d');
+});
+
+task('deploy', [
+  //'deploy:prepare',
+  'deploy:release',
+  'deploy:update_code',
+  'deploy:shared',
+  'deploy:writable',
+  // 'deploy:vendors',
+  'deploy:symlink',
+  'cleanup'
+]);
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');

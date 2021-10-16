@@ -118,3 +118,16 @@ Volumes
 - themes
 
 `scp -rp files root@159.65.196.174:/mnt/volume_ams3_01/a15/drupal-files `
+
+## Portainer ##
+
+```shell
+docker run -d --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    --env "VIRTUAL_HOST=portainer.j3host.nl" \
+    --env "LETSENCRYPT_HOST=portainer.j3host.nl" \
+    --env "VIRTUAL_PORT=9000" \
+    portainer/portainer-ce:latest
+```

@@ -13,7 +13,6 @@ services:
       VIRTUAL_HOST: nieuw.scoutinga15.nl
       LETSENCRYPT_HOST: nieuw.scoutinga15.nl
     restart: always
-    ports:
-      - "3000:80"
+    network_mode: bridge
     volumes:
       - "${DRUPAL_FILES_PUBLIC}:/opt/drupal/web/sites/default/files"

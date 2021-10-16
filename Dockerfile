@@ -67,14 +67,14 @@ COPY composer.json .
 COPY composer.lock .
 COPY web/assets web/assets/
 COPY web/themes web/themes/
-COPY web/modules web/modules/
+# COPY web/modules web/modules/
 COPY web/sites/default web/sites/default/
 
 RUN set -eux; \
 	export COMPOSER_HOME="$(mktemp -d)"; \
   composer install --no-interaction; \
 	#composer create-project --no-interaction "drupal/recommended-project:$DRUPAL_VERSION" ./; \
-	chown -R www-data:www-data web/sites web/modules web/themes; \
+	chown -R www-data:www-data config web/sites web/modules web/themes; \
 	rmdir /var/www/html; \
 	ln -sf /opt/drupal/web /var/www/html; \
 	# delete composer cache
