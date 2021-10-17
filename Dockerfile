@@ -17,7 +17,6 @@ RUN set -eux; \
 		libpq-dev \
 		libzip-dev \
 	; \
-	\
 	docker-php-ext-configure gd \
 		--with-freetype \
 		--with-jpeg=/usr \
@@ -43,9 +42,12 @@ RUN set -eux; \
 		| xargs -rt apt-mark manual; \
 	\
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+  apt-get install -y  \
+    git  \
+    nodejs  \
+    npm \
+  ;\
 	rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && apt-get install -y git
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
@@ -59,6 +61,13 @@ RUN { \
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/
 
+# Upgrading Node
+RUN npm cache clean -f
+RUN npm install -g n
+RUN n stable
+
+RUN npm install --global gulp-cli
+
 WORKDIR /opt/drupal
 
 COPY config config/
@@ -67,7 +76,7 @@ COPY composer.json .
 COPY composer.lock .
 COPY web/assets web/assets/
 COPY web/themes web/themes/
-# COPY web/modules web/modules/
+COPY web/profiles web/profiles
 COPY web/sites/default web/sites/default/
 
 RUN set -eux; \
@@ -79,5 +88,8 @@ RUN set -eux; \
 	ln -sf /opt/drupal/web /var/www/html; \
 	# delete composer cache
 	rm -rf "$COMPOSER_HOME"
+
+RUN cd web/profiles/contrib/droopler/themes/custom/droopler_theme && npm install && gulp dist
+RUN cd web/themes/custom/droopler_a15 && npm install && gulp dist
 
 ENV PATH=${PATH}:/opt/drupal/vendor/bin

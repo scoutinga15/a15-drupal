@@ -16,9 +16,9 @@ set('git_tty', true);
 add('shared_files', [
   '.env'
 ]);
-add('shared_dirs', [
-  'web/sites/default/files'
-]);
+//add('shared_dirs', [
+//  'web/sites/default/files'
+//]);
 
 // Writable dirs by web server
 add('writable_dirs', [
@@ -43,11 +43,11 @@ host('159.65.196.174')
 
 // Tasks
 task('drush:cr', function () {
-    run('cd {{release_path}} && drush cr');
+    run('cd {{release_path}} && docker-compose exec drupal drush cr');
 });
 
 task('drush:cim', function () {
-  run('cd {{release_path}} && drush cim -y');
+  run('cd {{release_path}} && docker-compose exec drupal drush cim -y');
 });
 
 task ('dc:build', function () {
@@ -58,13 +58,21 @@ task ('dc:up', function () {
   run('cd {{release_path}} && docker-compose -pa15 up -d');
 });
 
+task ('dc:down', function () {
+  run('cd {{release_path}} && docker-compose -pa15 down -v');
+});
+
 task('deploy', [
   //'deploy:prepare',
   'deploy:release',
   'deploy:update_code',
-  'deploy:shared',
+  //'deploy:shared',
   'deploy:writable',
   // 'deploy:vendors',
+  'dc:build',
+  'dc:up',
+  'drush:cim',
+  'drush:cr',
   'deploy:symlink',
   'cleanup'
 ]);
@@ -72,4 +80,5 @@ task('deploy', [
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
+# Shared files location
 # /mnt/volume_ams3_01/a15/drupal-files/files

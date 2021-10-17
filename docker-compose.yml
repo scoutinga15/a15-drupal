@@ -14,5 +14,7 @@ services:
       LETSENCRYPT_HOST: nieuw.scoutinga15.nl
     restart: always
     network_mode: bridge
+#    ports:
+#      - 8080:80
     volumes:
       - "${DRUPAL_FILES_PUBLIC}:/opt/drupal/web/sites/default/files"
