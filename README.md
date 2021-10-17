@@ -131,3 +131,20 @@ docker run -d --name portainer \
     --env "VIRTUAL_PORT=9000" \
     portainer/portainer-ce:latest
 ```
+
+## Files and database ##
+
+SCP files to server
+```shell
+scp -rp files root@159.65.196.174:/mnt/volume_ams3_01/a15/drupal-files
+```
+
+sql dump
+```shell
+drush sql-dump > ./a15-local-$(date +%Y-%m-%d-%H.%M.%S).sql
+```
+
+gzip sql
+```shell
+drush sql-dump | gzip -9 > ./a15-local-$(date +%Y-%m-%d-%H.%M.%S).sql
+```

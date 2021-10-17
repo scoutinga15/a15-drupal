@@ -41,32 +41,34 @@ host('159.65.196.174')
   ->set('deploy_path', '/mnt/volume_ams3_01/a15')
   ->set('writable_mode', 'chmod');
 
+set('execute-docker-compose', 'cd {{release_path}} && docker-compose -pa15');
+
 // Tasks
 task('drush:cr', function () {
-    run('cd {{release_path}} && docker-compose exec drupal drush cr');
+    run('{{ execute-docker-compose }} exec -T drupal drush cr');
 });
 
 task('drush:cim', function () {
-  run('cd {{release_path}} && docker-compose exec drupal drush cim -y');
+  run('{{ execute-docker-compose }} exec -T drupal drush cim -y');
 });
 
 task ('dc:build', function () {
-  run('cd {{release_path}} && docker-compose -pa15 build');
+  run('{{ execute-docker-compose }} build');
 });
 
 task ('dc:up', function () {
-  run('cd {{release_path}} && docker-compose -pa15 up -d');
+  run('{{ execute-docker-compose }} up -d');
 });
 
 task ('dc:down', function () {
-  run('cd {{release_path}} && docker-compose -pa15 down -v');
+  run('{{ execute-docker-compose }} down -v');
 });
 
 task('deploy', [
   //'deploy:prepare',
   'deploy:release',
   'deploy:update_code',
-  //'deploy:shared',
+  'deploy:shared',
   'deploy:writable',
   // 'deploy:vendors',
   'dc:build',
