@@ -28,7 +28,7 @@ id: block_content.d_paragraph_block.field_paragraphs
 field_name: field_paragraphs
 entity_type: block_content
 bundle: d_paragraph_block
-label: Paragrafen
+label: Paragraphs
 description: ''
 required: false
 translatable: false

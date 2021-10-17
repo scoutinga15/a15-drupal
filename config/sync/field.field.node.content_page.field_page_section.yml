@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_page_section
     - node.type.content_page
     - paragraphs.paragraphs_type.d_p_banner
+    - paragraphs.paragraphs_type.d_p_block
     - paragraphs.paragraphs_type.d_p_carousel
     - paragraphs.paragraphs_type.d_p_form
     - paragraphs.paragraphs_type.d_p_gallery
@@ -20,6 +21,7 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_text_paged
     - paragraphs.paragraphs_type.d_p_text_with_bckg
     - paragraphs.paragraphs_type.d_p_tiles
+    - paragraphs.paragraphs_type.from_library
   module:
     - entity_reference_revisions
 _core:
@@ -55,6 +57,7 @@ settings:
       d_p_side_by_side: d_p_side_by_side
       d_p_tiles: d_p_tiles
       d_p_block: d_p_block
+      from_library: from_library
     target_bundles_drag_drop:
       d_p_banner:
         enabled: true
@@ -62,12 +65,6 @@ settings:
       d_p_block:
         enabled: true
         weight: 38
-      d_p_blog_image:
-        weight: 14
-        enabled: false
-      d_p_blog_text:
-        weight: 15
-        enabled: false
       d_p_carousel:
         enabled: true
         weight: 18
@@ -122,4 +119,7 @@ settings:
       d_p_tiles:
         enabled: true
         weight: 36
+      from_library:
+        enabled: true
+        weight: 42
 field_type: entity_reference_revisions

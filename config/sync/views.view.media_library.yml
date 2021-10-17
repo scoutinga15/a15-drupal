@@ -50,10 +50,10 @@ display:
           submit_button: 'Filters toepassen'
           reset_button: false
           reset_button_label: Reset
-          exposed_sorts_label: 'Sorteren op'
+          exposed_sorts_label: 'Sort by'
           expose_sort_order: false
-          sort_asc_label: Oplopend
-          sort_desc_label: Aflopend
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         type: mini
         options:
@@ -63,12 +63,12 @@ display:
           total_pages: null
           expose:
             items_per_page: false
-            items_per_page_label: 'Items per pagina'
+            items_per_page_label: 'Items per page'
             items_per_page_options: '6, 12, 24, 48'
             items_per_page_options_all: false
-            items_per_page_options_all_label: '- Alle -'
+            items_per_page_options_all_label: '- All -'
             offset: false
-            offset_label: Startpunt
+            offset_label: Offset
           tags:
             previous: ‹‹
             next: ››
@@ -379,7 +379,7 @@ display:
           exposed: true
           expose:
             operator_id: langcode_op
-            label: Taal
+            label: Language
             description: ''
             use_operator: false
             operator: langcode_op
@@ -485,7 +485,7 @@ display:
   page:
     display_plugin: page
     id: page
-    display_title: Pagina
+    display_title: Page
     position: 1
     display_options:
       display_extenders: {  }

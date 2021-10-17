@@ -19,7 +19,7 @@ content:
     weight: 26
     settings:
       title: Paragraaf
-      title_plural: Paragrafen
+      title_plural: Paragraphs
       edit_mode: open
       add_mode: dropdown
       form_display_mode: default

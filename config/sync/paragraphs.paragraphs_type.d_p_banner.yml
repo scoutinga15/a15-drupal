@@ -1,7 +1,12 @@
 uuid: 747b77b4-55a4-44a8-a9bd-b31e337eb7d5
 langcode: nl
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - paragraphs_library
+third_party_settings:
+  paragraphs_library:
+    allow_library_conversion: true
 _core:
   default_config_hash: UR51eRfdmDJZnbIVC4ta2yCtW9xDuy93EX0VubHtC4A
 id: d_p_banner

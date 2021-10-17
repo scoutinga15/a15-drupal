@@ -1,7 +1,12 @@
 uuid: 5481e339-e26d-4785-ba48-78716c7aec42
 langcode: nl
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - paragraphs_library
+third_party_settings:
+  paragraphs_library:
+    allow_library_conversion: true
 _core:
   default_config_hash: 8Cmm-iHUqqsLwToxX_avna5TjmVgZ5jPrW-A_TKtddg
 id: d_p_carousel

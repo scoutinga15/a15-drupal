@@ -23,3 +23,13 @@ matchers:
       metadata: ''
       substitution_type: canonical
       limit: 100
+  4a7641f0-d6a4-4602-b2aa-12509aefa50b:
+    uuid: 4a7641f0-d6a4-4602-b2aa-12509aefa50b
+    id: 'entity:media'
+    weight: 0
+    settings:
+      metadata: '[media:name]'
+      bundles: {  }
+      group_by_bundle: true
+      substitution_type: media
+      limit: 100

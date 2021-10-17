@@ -31,10 +31,10 @@ display:
           submit_button: Filter
           reset_button: true
           reset_button_label: Reset
-          exposed_sorts_label: 'Sorteren op'
+          exposed_sorts_label: 'Sort by'
           expose_sort_order: true
-          sort_asc_label: Oplopend
-          sort_desc_label: Aflopend
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         type: full
         options:
@@ -311,7 +311,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Bewerkingen
+          label: Operations
           exclude: false
           alter:
             alter_text: false
@@ -501,7 +501,7 @@ display:
           exposed: true
           expose:
             operator_id: langcode_op
-            label: Taal
+            label: Language
             description: ''
             use_operator: false
             operator: langcode_op
@@ -601,7 +601,7 @@ display:
         weight: -10
       display_extenders: {  }
     display_plugin: page
-    display_title: Pagina
+    display_title: Page
     id: page_1
     position: 1
     cache_metadata:
