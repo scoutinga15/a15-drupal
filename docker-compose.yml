@@ -10,8 +10,8 @@ services:
       DRUPAL_DB_PASSWORD: ${DRUPAL_DB_PASSWORD}
       DRUPAL_DB_HOST: ${DRUPAL_DB_HOST}
       DRUPAL_DB_PORT: ${DRUPAL_DB_PORT}
-      VIRTUAL_HOST: nieuw.scoutinga15.nl
-      LETSENCRYPT_HOST: nieuw.scoutinga15.nl
+      VIRTUAL_HOST: nieuw.scoutinga15.nl,scoutinga15.nl,www.scoutinga15.nl
+      LETSENCRYPT_HOST: nieuw.scoutinga15.nl,scoutinga15.nl,www.scoutinga15.nl
     restart: always
     network_mode: bridge
 #    ports:
