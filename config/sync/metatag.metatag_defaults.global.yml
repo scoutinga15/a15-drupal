@@ -7,5 +7,7 @@ _core:
 id: global
 label: Algemeen
 tags:
-  canonical_url: '[current-page:url]'
   title: '[current-page:title] | [site:name]'
+  robots: 'index, follow'
+  canonical_url: '[current-page:url]'
+  theme_color: '#00A551'
