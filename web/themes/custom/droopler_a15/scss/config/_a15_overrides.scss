@@ -32,3 +32,11 @@
     }
   }
 }
+
+.d-media-background-wrapper {
+  iframe.video-embed {
+    @include media-breakpoint-down(sm) {
+      pointer-events: all;
+    }
+  }
+}
