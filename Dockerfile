@@ -59,6 +59,11 @@ RUN { \
 		echo 'opcache.fast_shutdown=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+RUN { \
+    echo 'upload_max_filesize=200M'; \
+    echo 'post_max_size=200M'; \
+  } > /usr/local/etc/php/conf.d/uploads.ini
+
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/
 
 # Upgrading Node

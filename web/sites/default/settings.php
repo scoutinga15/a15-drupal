@@ -814,8 +814,6 @@ $settings['config_sync_directory'] = '../config/sync';
 
 $settings['tome_static_directory'] = '../html';
 
-ini_set("upload_max_filesize","200M");
-
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
