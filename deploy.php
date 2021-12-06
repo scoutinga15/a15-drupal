@@ -28,9 +28,7 @@ add('writable_dirs', [
   'web/modules',
 ]);
 
-
 // Hosts
-
 host('159.65.196.174')
   ->user('root')
   ->port(22)
@@ -44,11 +42,11 @@ host('159.65.196.174')
 set('execute-docker-compose', 'cd {{release_path}} && docker-compose -pa15');
 
 // Tasks
-task('drush:cr', function () {
+task('dc:drush-cr', function () {
     run('{{ execute-docker-compose }} exec -T drupal drush cr');
 });
 
-task('drush:cim', function () {
+task('dc:drush-cim', function () {
   run('{{ execute-docker-compose }} exec -T drupal drush cim -y');
 });
 
@@ -73,8 +71,8 @@ task('deploy', [
   // 'deploy:vendors',
   'dc:build',
   'dc:up',
-  'drush:cim',
-  'drush:cr',
+  'dc:drush-cim',
+  'dc:drush-cr',
   'deploy:symlink',
   'cleanup'
 ]);

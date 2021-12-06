@@ -23,8 +23,8 @@ content:
       player_settings:
         autoplay: '1'
         loop: '1'
+        controls: '1'
         muted: '1'
-        controls: 0
       video_settings:
         cover: '1'
         image_style: ''
