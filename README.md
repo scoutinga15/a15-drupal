@@ -1,6 +1,5 @@
 # A15 website #
 
-
 ## How to build the website? ##
 
 ** Run npm**
@@ -84,6 +83,7 @@ docker run --detach \
     --name nginx-proxy \
     --publish 80:80 \
     --publish 443:443 \
+    --volume /mnt/volume_ams3_01/proxy/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro \
     --volume /mnt/volume_ams3_01/proxy/certs:/etc/nginx/certs \
     --volume /mnt/volume_ams3_01/proxy/vhost:/etc/nginx/vhost.d \
     --volume /mnt/volume_ams3_01/proxy/html:/usr/share/nginx/html \

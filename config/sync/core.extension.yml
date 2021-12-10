@@ -72,6 +72,7 @@ module:
   link_attributes: 0
   linkit: 0
   locale: 0
+  mailsystem: 0
   media: 0
   media_library: 0
   menu_link_content: 0
@@ -94,6 +95,7 @@ module:
   simple_sitemap: 0
   svg_image: 0
   svg_image_responsive: 0
+  swiftmailer: 0
   system: 0
   taxonomy: 0
   text: 0
