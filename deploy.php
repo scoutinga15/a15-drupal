@@ -46,12 +46,18 @@ task('dc:drush-cr', function () {
     run('{{ execute-docker-compose }} exec -T drupal drush cr');
 });
 
+task('dc:drush-updb', function () {
+  run('{{ execute-docker-compose }} exec -T drupal drush updb -y');
+});
+
 task('dc:drush-cim', function () {
   run('{{ execute-docker-compose }} exec -T drupal drush cim -y');
 });
 
 task ('dc:build', function () {
-  run('{{ execute-docker-compose }} build');
+  run('{{ execute-docker-compose }} build', [
+    'timeout' => 600
+  ]);
 });
 
 task ('dc:up', function () {
@@ -71,6 +77,8 @@ task('deploy', [
   // 'deploy:vendors',
   'dc:build',
   'dc:up',
+  'dc:drush-updb',
+  'dc:drush-cr',
   'dc:drush-cim',
   'dc:drush-cr',
   'deploy:symlink',
