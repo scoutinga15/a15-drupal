@@ -79,6 +79,7 @@ COPY config config/
 COPY drush drush/
 COPY composer.json .
 COPY composer.lock .
+COPY composer.patches.json .
 COPY web/assets web/assets/
 COPY web/themes web/themes/
 COPY web/modules web/module/

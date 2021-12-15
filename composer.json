@@ -20,6 +20,7 @@
     },
     "require": {
         "composer/installers": "^1.2",
+        "cweagans/composer-patches": "^1.7",
         "droptica/droopler": "8.3.0.0",
         "drupal/config_ignore": "^2.3",
         "drupal/console": "~1.0",
@@ -52,6 +53,11 @@
         "sort-packages": true
     },
     "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patches-file": "composer.patches.json",
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
