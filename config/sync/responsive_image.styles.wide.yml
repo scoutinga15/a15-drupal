@@ -10,7 +10,7 @@ dependencies:
 _core:
   default_config_hash: CcYzyNx9FjzWWNCWNl2j5tTKTB6FlMgInqtB3oTYnX4
 id: wide
-label: Breed
+label: Wide
 image_style_mappings:
   -
     breakpoint_id: responsive_image.viewport_sizing

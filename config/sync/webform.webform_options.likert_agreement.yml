@@ -1,0 +1,14 @@
+uuid: 7f9665a3-af11-4cd1-8312-b462dded5de6
+langcode: nl
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform
+_core:
+  default_config_hash: nPp-CfMKrP0yDMtyO0wQRwawEqaJVAPzQapinXmDgyU
+id: likert_agreement
+label: 'Likertschaal: Overeenstemming'
+category: Likertschaal
+likert: true
+options: "1: Helemaal oneens\r\n2: Oneens\r\n3: Neutraal\r\n4: Eens\r\n5: Helemaal eens\n"

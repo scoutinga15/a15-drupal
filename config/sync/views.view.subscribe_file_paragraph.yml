@@ -41,7 +41,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Toepassen
+          submit_button: Apply
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -319,7 +319,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Aangemaakt
+          label: Created
           exclude: false
           alter:
             alter_text: false

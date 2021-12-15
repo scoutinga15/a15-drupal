@@ -3,8 +3,8 @@ langcode: nl
 status: true
 dependencies:
   module:
-    - contact
     - paragraphs
+    - webform
 _core:
   default_config_hash: SGoXpUdq7b4-ievIhzSxIKpusnmgsOXrAJQDvAf0iyE
 id: paragraph.field_d_forms
@@ -12,7 +12,7 @@ field_name: field_d_forms
 entity_type: paragraph
 type: entity_reference
 settings:
-  target_type: contact_form
+  target_type: webform
 module: core
 locked: false
 cardinality: 1

@@ -1,0 +1,13 @@
+uuid: 39a401ad-76f9-4e49-8af6-51650f04a047
+langcode: nl
+status: true
+dependencies:
+  module:
+    - webform
+_core:
+  default_config_hash: begZ0-RmTzO_zDAwEKA2lKvtGYw1vbFOzbQOJzUbZX0
+id: webform_submission_make_unlock_action
+label: 'Inzending ontgrendelen'
+type: webform_submission
+plugin: webform_submission_make_unlock_action
+configuration: {  }

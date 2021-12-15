@@ -42,7 +42,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Toepassen
+          submit_button: Apply
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -105,7 +105,7 @@ display:
           exception:
             value: ''
             title_enable: false
-            title: Alle
+            title: All
           title_enable: true
           title: '{{ arguments.tid }}'
           default_argument_type: fixed

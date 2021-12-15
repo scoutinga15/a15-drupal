@@ -54,6 +54,10 @@ task('dc:drush-cim', function () {
   run('{{ execute-docker-compose }} exec -T drupal drush cim -y');
 });
 
+task('dc:drush-edel', function () {
+  run('{{ execute-docker-compose }} exec -T drupal drush edel paragraph 34');
+});
+
 task ('dc:build', function () {
   run('{{ execute-docker-compose }} build', [
     'timeout' => 600

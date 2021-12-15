@@ -301,7 +301,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Grootte
+          label: Size
           exclude: false
           alter:
             alter_text: false
@@ -1033,7 +1033,7 @@ display:
           exception:
             value: all
             title_enable: false
-            title: Alle
+            title: All
           title_enable: true
           title: 'Bestandsgebruikinformatie voor {{ arguments.fid }}'
           default_argument_type: fixed

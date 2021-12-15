@@ -21,6 +21,7 @@
     "require": {
         "composer/installers": "^1.2",
         "droptica/droopler": "8.3.0.0",
+        "drupal/config_ignore": "^2.3",
         "drupal/console": "~1.0",
         "drupal/core-composer-scaffold": "^8.9 || ^9.0",
         "drupal/core-recommended": "^8.9 || ^9.0",
@@ -28,8 +29,11 @@
         "drupal/gin": "^3.0",
         "drupal/gin_login": "^1.0",
         "drupal/gin_toolbar": "^1.0@beta",
+        "drupal/honeypot": "^2.0",
+        "drupal/signaturefield": "^1.0",
         "drupal/swiftmailer": "^2.1",
         "drupal/tome": "^1.4",
+        "drupal/webform": "^6.1",
         "drush/drush": "^9.0 || ^10.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "zaporylie/composer-drupal-optimizations": "^1.1"

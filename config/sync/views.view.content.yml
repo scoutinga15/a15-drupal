@@ -42,8 +42,8 @@ display:
           tags:
             previous: '‹ Vorige'
             next: 'Volgende ›'
-            first: '« Eerste'
-            last: 'Laatste »'
+            first: '« First'
+            last: 'Last »'
       style:
         type: table
         options:
