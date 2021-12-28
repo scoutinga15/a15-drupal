@@ -1,15 +1,15 @@
+_core:
+  default_config_hash: RSNbRD3ekSaZoE19f3eHhm93gKOcD2PtmaAVmV3XMes
+langcode: nl
 transport: smtp
 smtp_host: send.one.com
 smtp_port: 25
 smtp_encryption: '0'
+sendmail_path: /usr/sbin/sendmail
+sendmail_mode: t
 smtp_credential_provider: swiftmailer
 smtp_credentials:
   swiftmailer:
     username: admin@scoutinga15.nl
     password: 1337heid
-sendmail_path: /usr/sbin/sendmail
-sendmail_mode: t
 spool_directory: ''
-_core:
-  default_config_hash: RSNbRD3ekSaZoE19f3eHhm93gKOcD2PtmaAVmV3XMes
-langcode: nl

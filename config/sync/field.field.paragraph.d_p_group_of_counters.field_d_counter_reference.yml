@@ -23,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       d_p_single_counter: d_p_single_counter
+    negate: 0
     target_bundles_drag_drop:
       d_p_banner:
         weight: 13
@@ -43,8 +43,8 @@ settings:
         weight: 16
         enabled: false
       d_p_single_counter:
-        enabled: true
         weight: 22
+        enabled: true
       d_p_single_text_block:
         weight: 17
         enabled: false

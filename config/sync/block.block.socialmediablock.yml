@@ -15,6 +15,6 @@ plugin: social_media_block
 settings:
   id: social_media_block
   label: 'Je vindt ons ook hier'
-  provider: d_social_media
   label_display: visible
+  provider: d_social_media
 visibility: {  }

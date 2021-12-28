@@ -23,8 +23,6 @@ mode: d_header
 content:
   field_header_cta:
     type: link
-    weight: 0
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -33,6 +31,8 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_header_layout: true
   field_meta_tags: true

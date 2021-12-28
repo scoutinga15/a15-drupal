@@ -1,5 +1,5 @@
-export:
-  folder: custom
-langcode: nl
 _core:
   default_config_hash: YS8SFNy6Qff2UEsQ5zXWEj-ABeRS-jCgcHJrXHJhtJ0
+langcode: nl
+export:
+  folder: custom

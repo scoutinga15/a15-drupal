@@ -1,7 +1,11 @@
 uuid: 0c15afaa-341d-4135-bf11-5941288eb617
 langcode: nl
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - media
+    - search
+    - system
 _core:
   default_config_hash: _fwB1fYnatJOXVdX0EVunrUmqJF86LXUUJ_R4DDN0fY
 id: authenticated

@@ -54,8 +54,9 @@ task('dc:drush-cim', function () {
   run('{{ execute-docker-compose }} exec -T drupal drush cim -y');
 });
 
-task('dc:drush-edel', function () {
-  run('{{ execute-docker-compose }} exec -T drupal drush edel paragraph 34');
+task('dc:drush-dump', function () {
+  run('{{ execute-docker-compose }} exec -T drupal drush sql-dump | gzip -9 > ~/dump.sql.gz');
+  download('~/dump.sql.gz', '.');
 });
 
 task ('dc:build', function () {
@@ -91,6 +92,12 @@ task('deploy', [
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
+
+
+//task('dc:drush-edel', function () {
+//  run('{{ execute-docker-compose }} exec -T drupal drush edel paragraph 34');
+//});
+
 
 # Shared files location
 # /mnt/volume_ams3_01/a15/drupal-files/files

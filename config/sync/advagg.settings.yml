@@ -1,3 +1,6 @@
+langcode: nl
+_core:
+  default_config_hash: qgmTxkF-D5WlW9H3ces9OEwK1kxFuXz0z_QMJ-f0ytA
 css:
   brotli: true
   combine_media: true
@@ -22,6 +25,3 @@ skip_enabled_preprocess_check: false
 show_bypass_cookie_message: true
 symlinks: false
 symlinksifownermatch: false
-_core:
-  default_config_hash: qgmTxkF-D5WlW9H3ces9OEwK1kxFuXz0z_QMJ-f0ytA
-langcode: nl

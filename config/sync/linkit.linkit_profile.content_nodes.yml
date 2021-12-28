@@ -6,30 +6,30 @@ dependencies:
     - node
 _core:
   default_config_hash: jwQ6hgEe-cv-eKsM2YEvZCNa8PumkG23YbrKoM4HgMc
-id: content_nodes
 label: 'Content nodes'
+id: content_nodes
 description: ''
 matchers:
   a0278b17-a284-42b8-ac99-54c4d4c39dbe:
-    uuid: a0278b17-a284-42b8-ac99-54c4d4c39dbe
     id: 'entity:node'
-    weight: 0
+    uuid: a0278b17-a284-42b8-ac99-54c4d4c39dbe
     settings:
-      result_description: '[node:langcode], [node:author], [node:created]'
+      metadata: ''
       bundles:
         content_page: content_page
       group_by_bundle: false
-      include_unpublished: false
-      metadata: ''
       substitution_type: canonical
       limit: 100
-  4a7641f0-d6a4-4602-b2aa-12509aefa50b:
-    uuid: 4a7641f0-d6a4-4602-b2aa-12509aefa50b
-    id: 'entity:media'
+      include_unpublished: false
+      result_description: '[node:langcode], [node:author], [node:created]'
     weight: 0
+  4a7641f0-d6a4-4602-b2aa-12509aefa50b:
+    id: 'entity:media'
+    uuid: 4a7641f0-d6a4-4602-b2aa-12509aefa50b
     settings:
       metadata: '[media:name]'
       bundles: {  }
       group_by_bundle: true
       substitution_type: media
       limit: 100
+    weight: 0

@@ -24,13 +24,13 @@ mode: d_small_box
 content:
   field_teaser_media_image:
     type: media_thumbnail
-    weight: 1
-    region: content
     label: hidden
     settings:
-      image_style: small_box_image
       image_link: content
+      image_style: small_box_image
     third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   field_header_cta: true
   field_header_layout: true

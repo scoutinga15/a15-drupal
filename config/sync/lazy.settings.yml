@@ -1,3 +1,6 @@
+_core:
+  default_config_hash: K8gdrkKx2eUlGDP3SQrWXGo66DDd5vUhOmwT3lY0mPs
+langcode: nl
 skipClass: no-lazy
 disable_admin: true
 visibility:
@@ -29,9 +32,6 @@ lazysizes:
   ricTimeout: 0
   throttleDelay: 125
   plugins: {  }
-_core:
-  default_config_hash: K8gdrkKx2eUlGDP3SQrWXGo66DDd5vUhOmwT3lY0mPs
 image_fields: {  }
 alter_tag: {  }
 formatters: {  }
-langcode: nl

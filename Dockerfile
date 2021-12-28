@@ -1,4 +1,4 @@
-FROM php:7.4-apache-buster
+FROM php:8.0-apache-buster
 
 # install the PHP extensions we need
 RUN set -eux; \
@@ -46,6 +46,7 @@ RUN set -eux; \
     git  \
     nodejs  \
     npm \
+    mariadb-client \
   ;\
 	rm -rf /var/lib/apt/lists/*
 
@@ -62,6 +63,7 @@ RUN { \
 RUN { \
     echo 'upload_max_filesize=200M'; \
     echo 'post_max_size=200M'; \
+    echo 'max_execution_time=120'; \
   } > /usr/local/etc/php/conf.d/uploads.ini
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/
@@ -87,7 +89,7 @@ COPY web/sites/default web/sites/default/
 
 RUN set -eux; \
 	export COMPOSER_HOME="$(mktemp -d)"; \
-  composer install --no-interaction; \
+  composer install --no-dev --no-interaction; \
 	#composer create-project --no-interaction "drupal/recommended-project:$DRUPAL_VERSION" ./; \
 	chown -R www-data:www-data config web/sites web/modules web/themes; \
 	rmdir /var/www/html; \
