@@ -1,4 +1,4 @@
-FROM php:8.0-apache-buster
+FROM php:7.4-apache-buster
 
 # install the PHP extensions we need
 RUN set -eux; \
