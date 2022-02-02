@@ -1,0 +1,8 @@
+uuid: f21eb75f-1dbe-4938-a231-f317456e2da1
+langcode: nl
+status: true
+dependencies: {  }
+id: footer
+label: Footer
+description: ''
+locked: false

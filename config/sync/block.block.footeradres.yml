@@ -10,8 +10,8 @@ dependencies:
     - droopler_a15
 id: footeradres
 theme: droopler_a15
-region: footer_second
-weight: 0
+region: footer_third
+weight: -5
 provider: null
 plugin: 'block_content:87617313-355b-4b7d-a10b-614079ce4f5f'
 settings:

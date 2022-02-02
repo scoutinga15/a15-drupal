@@ -1,0 +1,25 @@
+uuid: 25ab2d13-88e9-4c92-bda5-3561c4cd4cd2
+langcode: nl
+status: true
+dependencies:
+  content:
+    - 'block_content:content_block:d18574f7-38e7-48da-8c91-6c2e443f11cf'
+  module:
+    - block_content
+  theme:
+    - droopler_a15
+id: footerlinks
+theme: droopler_a15
+region: footer_second
+weight: -6
+provider: null
+plugin: 'block_content:d18574f7-38e7-48da-8c91-6c2e443f11cf'
+settings:
+  id: 'block_content:d18574f7-38e7-48da-8c91-6c2e443f11cf'
+  label: 'Ook belangrijk'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }
