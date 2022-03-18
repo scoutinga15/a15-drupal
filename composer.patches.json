@@ -1,8 +1,5 @@
 {
   "patches": {
-    "drupal/core" : {
-      "Problems with the user table" : "https://git.drupalcode.org/issue/drupal-3255419/-/merge_requests/2.patch"
-    },
     "drupal/honeypot" : {
       "2943526 - primay key on table" : "https://www.drupal.org/files/issues/2018-07-31/honeypot-fix_missing_primary_key-8.x-2943526-6.patch"
     },

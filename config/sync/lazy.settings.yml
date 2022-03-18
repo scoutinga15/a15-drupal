@@ -32,6 +32,3 @@ lazysizes:
   ricTimeout: 0
   throttleDelay: 125
   plugins: {  }
-image_fields: {  }
-alter_tag: {  }
-formatters: {  }
