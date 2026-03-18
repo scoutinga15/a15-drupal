@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: clubhouse_booking
+label: 'Clubhouse Booking'
+icon_uuid: null
+icon_default: null
+description: 'Allows users to view and book clubhouse slots via a calendar.'
+behavior_plugins: {  }

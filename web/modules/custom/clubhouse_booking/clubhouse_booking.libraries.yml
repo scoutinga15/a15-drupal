@@ -1,0 +1,24 @@
+calendar_js:
+  remote: https://calendarjs.com/
+  version: 2.11.2
+  license:
+    name: MIT
+    url: https://github.com/williamtroup/CalendarJs/blob/main/LICENSE
+    gpl-compatible: true
+  js:
+    js/calendar.min.js: { minified: true }
+  css:
+    theme:
+      css/calendarjs.css: {}
+
+booking_calendar:
+  js:
+    js/booking_calendar.js: {}
+  css:
+    theme:
+      css/booking_calendar.css: {}
+  dependencies:
+    - clubhouse_booking/calendar_js
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings

@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the clubhouse_booking module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function clubhouse_booking_schema() {
+  $schema['clubhouse_slots'] = [
+    'description' => 'Stores free slots for the clubhouse.',
+    'fields' => [
+      'id' => [
+        'description' => 'The primary identifier for a slot.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'start_time' => [
+        'description' => 'The start time of the slot (Unix timestamp).',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'end_time' => [
+        'description' => 'The end time of the slot (Unix timestamp).',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'is_booked' => [
+        'description' => 'Boolean indicating whether the slot is booked.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  $schema['clubhouse_bookings'] = [
+    'description' => 'Stores bookings for the clubhouse.',
+    'fields' => [
+      'id' => [
+        'description' => 'The primary identifier for a booking.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'slot_id' => [
+        'description' => 'The ID of the slot being booked.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'user_name' => [
+        'description' => 'Name of the person booking.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'user_email' => [
+        'description' => 'Email of the person booking.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'booking_time' => [
+        'description' => 'The time the booking was made.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'foreign keys' => [
+      'booked_slot' => [
+        'table' => 'clubhouse_slots',
+        'columns' => ['slot_id' => 'id'],
+      ],
+    ],
+  ];
+
+  return $schema;
+}

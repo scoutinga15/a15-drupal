@@ -1,0 +1,46 @@
+clubhouse_booking.calendar:
+  path: '/clubhouse/booking'
+  defaults:
+    _controller: '\Drupal\clubhouse_booking\Controller\BookingController::calendar'
+    _title: 'Clubhouse Booking Calendar'
+  requirements:
+    _permission: 'access content'
+
+clubhouse_booking.slots:
+  path: '/api/clubhouse/slots'
+  defaults:
+    _controller: '\Drupal\clubhouse_booking\Controller\BookingController::getSlots'
+  requirements:
+    _permission: 'access content'
+
+clubhouse_booking.book:
+  path: '/clubhouse/book/{slot_id}'
+  defaults:
+    _form: '\Drupal\clubhouse_booking\Form\BookingForm'
+    _title: 'Book a Slot'
+  requirements:
+    _permission: 'access content'
+
+clubhouse_booking.cancel:
+  path: '/clubhouse/booking/cancel/{booking_id}'
+  defaults:
+    _form: '\Drupal\clubhouse_booking\Form\CancelBookingForm'
+    _title: 'Cancel Booking'
+  requirements:
+    _permission: 'access content'
+
+clubhouse_booking.request_custom:
+  path: '/clubhouse/request-custom-slot'
+  defaults:
+    _form: '\Drupal\clubhouse_booking\Form\RequestCustomSlotForm'
+    _title: 'Request Custom Slot'
+  requirements:
+    _permission: 'access content'
+
+clubhouse_booking.add_slot:
+  path: '/admin/clubhouse/add-slot'
+  defaults:
+    _form: '\Drupal\clubhouse_booking\Form\AddSlotForm'
+    _title: 'Add Free Slot'
+  requirements:
+    _permission: 'administer site configuration'

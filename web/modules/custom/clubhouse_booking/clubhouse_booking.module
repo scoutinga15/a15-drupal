@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Clubhouse Booking module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function clubhouse_booking_theme($existing, $type, $theme, $path) {
+  return [
+    'clubhouse_booking_calendar' => [
+      'variables' => [],
+    ],
+    'paragraph__clubhouse_booking' => [
+      'base hook' => 'paragraph',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function clubhouse_booking_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  if ($paragraph->getType() === 'clubhouse_booking') {
+    $variables['#attached']['library'][] = 'clubhouse_booking/booking_calendar';
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function clubhouse_booking_mail($key, &$message, $params) {
+  $options = [
+    'langcode' => $message['langcode'],
+  ];
+
+  switch ($key) {
+    case 'booking_confirmation':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Booking Confirmation: Clubhouse');
+      $message['body'][] = t('Hello @name,', ['@name' => $params['user_name']], $options);
+      $message['body'][] = t('Your booking for the clubhouse from @start to @end has been confirmed.', [
+        '@start' => $params['start'],
+        '@end' => $params['end'],
+      ], $options);
+      $message['body'][] = t('You can cancel your booking using the following link: @url', [
+        '@url' => $params['cancel_url'],
+      ], $options);
+      break;
+
+    case 'booking_cancellation':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Booking Cancellation: Clubhouse');
+      $message['body'][] = t('Hello @name,', ['@name' => $params['user_name']], $options);
+      $message['body'][] = t('Your booking for the clubhouse has been cancelled.', [], $options);
+      break;
+
+    case 'custom_slot_request':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('New Custom Slot Request');
+      $message['body'][] = t('A new custom slot request has been submitted by @name (@email).', [
+        '@name' => $params['user_name'],
+        '@email' => $params['user_email'],
+      ], $options);
+      $message['body'][] = t('Requested period: @start to @end', [
+        '@start' => $params['start'],
+        '@end' => $params['end'],
+      ], $options);
+      $message['body'][] = t('Message: @message', ['@message' => $params['message']], $options);
+      break;
+  }
+}

@@ -1,0 +1,11 @@
+name: Clubhouse Booking
+type: module
+description: 'Module for renting out the clubhouse with a calendar interface.'
+package: Custom
+core_version_requirement: ^8.9 || ^9.0
+dependencies:
+  - drupal:datetime
+  - drupal:datetime_range
+  - paragraphs:paragraphs
+'interface translation project': clubhouse_booking
+'interface translation server pattern': modules/custom/clubhouse_booking/translations/%project.%language.po
