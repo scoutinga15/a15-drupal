@@ -3,13 +3,25 @@ calendar_js:
   version: 2.11.2
   license:
     name: MIT
-    url: https://github.com/williamtroup/CalendarJs/blob/main/LICENSE
+    url: https://github.com/williamtroup/Calendar.js/blob/main/LICENSE.txt
     gpl-compatible: true
   js:
-    js/calendar.min.js: { minified: true }
+    https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@2.12.6/dist/calendar.min.js: { type: external }
   css:
     theme:
-      css/calendarjs.css: {}
+      https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@2.12.6/dist/calendar.js.min.css: { type: external }
+  dependencies:
+    - clubhouse_booking/lemonade_js
+
+lemonade_js:
+  remote: https://lemonadejs.com/
+  version: 2.0.0
+  license:
+    name: MIT
+    url: https://github.com/lemonadejs/lemonadejs/blob/main/LICENSE.md
+    gpl-compatible: true
+  js:
+    https://cdn.jsdelivr.net/npm/lemonadejs/dist/lemonade.min.js: { type: external }
 
 booking_calendar:
   js:
