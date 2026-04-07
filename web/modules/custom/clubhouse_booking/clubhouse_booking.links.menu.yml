@@ -1,0 +1,6 @@
+clubhouse_booking.admin_slots:
+  title: 'Clubhouse Bookings'
+  description: 'Manage clubhouse slots and bookings'
+  parent: system.admin_content
+  route_name: clubhouse_booking.admin_slots
+  weight: 20

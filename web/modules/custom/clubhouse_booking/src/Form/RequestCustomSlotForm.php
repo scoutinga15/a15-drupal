@@ -74,15 +74,15 @@ class RequestCustomSlotForm extends FormBase {
       '#required' => TRUE,
     ];
 
-    $form['start_time'] = [
-      '#type' => 'datetime',
-      '#title' => $this->t('Requested Start Time'),
+    $form['booking_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('From Date'),
       '#required' => TRUE,
     ];
 
-    $form['end_time'] = [
-      '#type' => 'datetime',
-      '#title' => $this->t('Requested End Time'),
+    $form['to_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('To Date'),
       '#required' => TRUE,
     ];
 
@@ -107,16 +107,13 @@ class RequestCustomSlotForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $start = $form_state->getValue('start_time');
-    $end = $form_state->getValue('end_time');
-
-    if ($start instanceof DrupalDateTime && $end instanceof DrupalDateTime) {
-      if ($start->getTimestamp() >= $end->getTimestamp()) {
-        $form_state->setErrorByName('end_time', $this->t('End time must be after start time.'));
-      }
-      if ($start->getTimestamp() < time()) {
-        $form_state->setErrorByName('start_time', $this->t('Start time cannot be in the past.'));
-      }
+    $from = $form_state->getValue('booking_date');
+    $to = $form_state->getValue('to_date');
+    if ($from && strtotime($from) < strtotime(date('Y-m-d'))) {
+      $form_state->setErrorByName('booking_date', $this->t('Requested date cannot be in the past.'));
+    }
+    if ($from && $to && strtotime($to) < strtotime($from)) {
+      $form_state->setErrorByName('to_date', $this->t('End date cannot be before start date.'));
     }
   }
 
@@ -126,20 +123,31 @@ class RequestCustomSlotForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $name = $form_state->getValue('name');
     $email = $form_state->getValue('email');
-    $start = $form_state->getValue('start_time')->getTimestamp();
-    $end = $form_state->getValue('end_time')->getTimestamp();
+    $from = $form_state->getValue('booking_date');
+    $to = $form_state->getValue('to_date');
     $message_text = $form_state->getValue('message');
 
-    // For now, we just notify the admin.
-    // In a real scenario, we might save this as a "pending" request.
+    // Save as a "requested" slot range.
+    $this->database->insert('clubhouse_slots')
+      ->fields([
+        'booking_date' => $from,
+        'to_date' => $to,
+        'status' => 'requested',
+        'user_name' => $name,
+        'user_email' => $email,
+        'message' => $message_text,
+        'created' => time(),
+      ])
+      ->execute();
+
+    // Notify the admin.
     $admin_email = \Drupal::config('system.site')->get('mail');
     $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     $params = [
       'user_name' => $name,
       'user_email' => $email,
-      'start' => date('Y-m-d H:i', $start),
-      'end' => date('Y-m-d H:i', $end),
+      'date' => $from . ($to && $to != $from ? ' - ' . $to : ''),
       'message' => $message_text,
     ];
 

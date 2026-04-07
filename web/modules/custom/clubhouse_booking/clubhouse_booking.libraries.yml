@@ -1,28 +1,15 @@
-calendar_js:
-  remote: https://calendarjs.com/
-  version: 2.11.2
+fullcalendar:
+  remote: https://fullcalendar.io/
+  version: 6.1.11
   license:
     name: MIT
-    url: https://github.com/williamtroup/Calendar.js/blob/main/LICENSE.txt
+    url: https://github.com/fullcalendar/fullcalendar/blob/main/LICENSE.txt
     gpl-compatible: true
   js:
-    https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@2.12.6/dist/calendar.min.js: { type: external }
+    https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js: { type: external }
   css:
     theme:
-      https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@2.12.6/dist/calendar.js.min.css: { type: external }
-  dependencies:
-    - clubhouse_booking/lemonade_js
-
-lemonade_js:
-  remote: https://lemonadejs.com/
-  version: 2.0.0
-  license:
-    name: MIT
-    url: https://github.com/lemonadejs/lemonadejs/blob/main/LICENSE.md
-    gpl-compatible: true
-  js:
-    https://cdn.jsdelivr.net/npm/lemonadejs/dist/lemonade.min.js: { type: external }
-
+      https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css: { type: external }
 booking_calendar:
   js:
     js/booking_calendar.js: {}
@@ -30,7 +17,7 @@ booking_calendar:
     theme:
       css/booking_calendar.css: {}
   dependencies:
-    - clubhouse_booking/calendar_js
+    - clubhouse_booking/fullcalendar
     - core/drupal
     - core/jquery
     - core/drupalSettings

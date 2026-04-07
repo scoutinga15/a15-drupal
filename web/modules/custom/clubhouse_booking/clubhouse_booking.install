@@ -10,7 +10,7 @@
  */
 function clubhouse_booking_schema() {
   $schema['clubhouse_slots'] = [
-    'description' => 'Stores free slots for the clubhouse.',
+    'description' => 'Stores slots for the clubhouse.',
     'fields' => [
       'id' => [
         'description' => 'The primary identifier for a slot.',
@@ -18,73 +18,107 @@ function clubhouse_booking_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ],
-      'start_time' => [
-        'description' => 'The start time of the slot (Unix timestamp).',
-        'type' => 'int',
-        'unsigned' => TRUE,
+      'booking_date' => [
+        'description' => 'The date of the slot (YYYY-MM-DD).',
+        'type' => 'varchar',
+        'length' => 10,
         'not null' => TRUE,
       ],
-      'end_time' => [
-        'description' => 'The end time of the slot (Unix timestamp).',
+      'to_date' => [
+        'description' => 'The end date of the slot/booking (YYYY-MM-DD).',
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => FALSE,
+      ],
+      'booking_id' => [
+        'description' => 'The unique identifier for a booking group.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+      ],
+      'status' => [
+        'description' => 'The status of the slot (free, requested, reserved, booked).',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => 'free',
+      ],
+      'user_name' => [
+        'description' => 'Name of the person booking (if any).',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ],
+      'user_email' => [
+        'description' => 'Email of the person booking (if any).',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ],
+      'message' => [
+        'description' => 'Message for custom slot requests.',
+        'type' => 'text',
+        'not null' => FALSE,
+      ],
+      'created' => [
+        'description' => 'Timestamp when the slot/booking was created.',
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => TRUE,
-      ],
-      'is_booked' => [
-        'description' => 'Boolean indicating whether the slot is booked.',
-        'type' => 'int',
-        'size' => 'tiny',
         'not null' => TRUE,
         'default' => 0,
       ],
     ],
     'primary key' => ['id'],
-  ];
-
-  $schema['clubhouse_bookings'] = [
-    'description' => 'Stores bookings for the clubhouse.',
-    'fields' => [
-      'id' => [
-        'description' => 'The primary identifier for a booking.',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ],
-      'slot_id' => [
-        'description' => 'The ID of the slot being booked.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ],
-      'user_name' => [
-        'description' => 'Name of the person booking.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ],
-      'user_email' => [
-        'description' => 'Email of the person booking.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ],
-      'booking_time' => [
-        'description' => 'The time the booking was made.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ],
-    ],
-    'primary key' => ['id'],
-    'foreign keys' => [
-      'booked_slot' => [
-        'table' => 'clubhouse_slots',
-        'columns' => ['slot_id' => 'id'],
-      ],
+    'indexes' => [
+      'booking_date' => ['booking_date'],
     ],
   ];
 
   return $schema;
+}
+
+/**
+ * Update schema to use day-based slots and include status, user info, and message.
+ */
+function clubhouse_booking_update_8001() {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+
+  if ($schema->tableExists('clubhouse_bookings')) {
+    $schema->dropTable('clubhouse_bookings');
+  }
+
+  if ($schema->tableExists('clubhouse_slots')) {
+    $schema->dropTable('clubhouse_slots');
+  }
+
+  $new_schema = clubhouse_booking_schema();
+  $schema->createTable('clubhouse_slots', $new_schema['clubhouse_slots']);
+}
+
+/**
+ * Add to_date and booking_id fields to clubhouse_slots.
+ */
+function clubhouse_booking_update_8002() {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+
+  if ($schema->tableExists('clubhouse_slots')) {
+    if (!$schema->fieldExists('clubhouse_slots', 'to_date')) {
+      $schema->addField('clubhouse_slots', 'to_date', [
+        'description' => 'The end date of the slot/booking (YYYY-MM-DD).',
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => FALSE,
+      ]);
+    }
+    if (!$schema->fieldExists('clubhouse_slots', 'booking_id')) {
+      $schema->addField('clubhouse_slots', 'booking_id', [
+        'description' => 'The unique identifier for a booking group.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+      ]);
+    }
+  }
 }

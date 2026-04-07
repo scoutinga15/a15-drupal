@@ -70,7 +70,7 @@ class BookingForm extends FormBase {
       ->execute()
       ->fetchObject();
 
-    if (!$slot || $slot->is_booked) {
+    if (!$slot || $slot->status !== 'free') {
       throw new NotFoundHttpException();
     }
 
@@ -79,10 +79,14 @@ class BookingForm extends FormBase {
       '#value' => $slot_id,
     ];
 
+    $date_string = $slot->booking_date;
+    if ($slot->to_date && $slot->to_date != $slot->booking_date) {
+      $date_string .= ' - ' . $slot->to_date;
+    }
+
     $form['slot_info'] = [
-      '#markup' => '<p>' . $this->t('Booking for: @start to @end', [
-        '@start' => date('Y-m-d H:i', $slot->start_time),
-        '@end' => date('Y-m-d H:i', $slot->end_time),
+      '#markup' => '<p>' . $this->t('Booking for: @date', [
+        '@date' => $date_string,
       ]) . '</p>',
     ];
 
@@ -117,17 +121,13 @@ class BookingForm extends FormBase {
     $name = $form_state->getValue('name');
     $email = $form_state->getValue('email');
 
-    $booking_id = $this->database->insert('clubhouse_bookings')
+    $this->database->update('clubhouse_slots')
       ->fields([
-        'slot_id' => $slot_id,
         'user_name' => $name,
         'user_email' => $email,
-        'booking_time' => time(),
+        'status' => 'booked',
+        'created' => time(),
       ])
-      ->execute();
-
-    $this->database->update('clubhouse_slots')
-      ->fields(['is_booked' => 1])
       ->condition('id', $slot_id)
       ->execute();
 
@@ -139,11 +139,15 @@ class BookingForm extends FormBase {
 
     // Send email notification.
     $langcode = $this->languageManager()->getCurrentLanguage()->getId();
+    $date_string = $slot->booking_date;
+    if ($slot->to_date && $slot->to_date != $slot->booking_date) {
+      $date_string .= ' - ' . $slot->to_date;
+    }
+
     $params = [
       'user_name' => $name,
-      'start' => date('Y-m-d H:i', $slot->start_time),
-      'end' => date('Y-m-d H:i', $slot->end_time),
-      'cancel_url' => Url::fromRoute('clubhouse_booking.cancel', ['booking_id' => $booking_id], ['absolute' => TRUE])->toString(),
+      'date' => $date_string,
+      'cancel_url' => Url::fromRoute('clubhouse_booking.cancel', ['slot_id' => $slot_id], ['absolute' => TRUE])->toString(),
     ];
     $this->mailManager->mail('clubhouse_booking', 'booking_confirmation', $email, $langcode, $params);
 

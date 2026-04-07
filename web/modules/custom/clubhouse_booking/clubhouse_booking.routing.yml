@@ -22,25 +22,49 @@ clubhouse_booking.book:
     _permission: 'access content'
 
 clubhouse_booking.cancel:
-  path: '/clubhouse/booking/cancel/{booking_id}'
+  path: '/clubhouse/booking/cancel/{slot_id}'
   defaults:
     _form: '\Drupal\clubhouse_booking\Form\CancelBookingForm'
     _title: 'Cancel Booking'
   requirements:
     _permission: 'access content'
 
-clubhouse_booking.request_custom:
+clubhouse_booking.admin_slots:
+  path: '/admin/clubhouse/booking/slots'
+  defaults:
+    _controller: '\Drupal\clubhouse_booking\Controller\BookingAdminController::slotsList'
+    _title: 'Manage Clubhouse Slots'
+  requirements:
+    _permission: 'administer site configuration'
+
+clubhouse_booking.add_slot:
+  path: '/admin/clubhouse/booking/add-slot'
+  defaults:
+    _form: '\Drupal\clubhouse_booking\Form\SlotForm'
+    _title: 'Add Slot'
+  requirements:
+    _permission: 'administer site configuration'
+
+clubhouse_booking.edit_slot:
+  path: '/admin/clubhouse/booking/edit-slot/{slot_id}'
+  defaults:
+    _form: '\Drupal\clubhouse_booking\Form\SlotForm'
+    _title: 'Edit Slot'
+  requirements:
+    _permission: 'administer site configuration'
+
+clubhouse_booking.delete_slot:
+  path: '/admin/clubhouse/booking/delete-slot/{slot_id}'
+  defaults:
+    _form: '\Drupal\clubhouse_booking\Form\DeleteSlotForm'
+    _title: 'Delete Slot'
+  requirements:
+    _permission: 'administer site configuration'
+
+clubhouse_booking.request_custom_slot:
   path: '/clubhouse/request-custom-slot'
   defaults:
     _form: '\Drupal\clubhouse_booking\Form\RequestCustomSlotForm'
     _title: 'Request Custom Slot'
   requirements:
     _permission: 'access content'
-
-clubhouse_booking.add_slot:
-  path: '/admin/clubhouse/add-slot'
-  defaults:
-    _form: '\Drupal\clubhouse_booking\Form\AddSlotForm'
-    _title: 'Add Free Slot'
-  requirements:
-    _permission: 'administer site configuration'

@@ -43,9 +43,8 @@ function clubhouse_booking_mail($key, &$message, $params) {
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('Booking Confirmation: Clubhouse');
       $message['body'][] = t('Hello @name,', ['@name' => $params['user_name']], $options);
-      $message['body'][] = t('Your booking for the clubhouse from @start to @end has been confirmed.', [
-        '@start' => $params['start'],
-        '@end' => $params['end'],
+      $message['body'][] = t('Your booking for the clubhouse on @date has been confirmed.', [
+        '@date' => $params['date'],
       ], $options);
       $message['body'][] = t('You can cancel your booking using the following link: @url', [
         '@url' => $params['cancel_url'],
@@ -56,7 +55,9 @@ function clubhouse_booking_mail($key, &$message, $params) {
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('Booking Cancellation: Clubhouse');
       $message['body'][] = t('Hello @name,', ['@name' => $params['user_name']], $options);
-      $message['body'][] = t('Your booking for the clubhouse has been cancelled.', [], $options);
+      $message['body'][] = t('Your booking for the clubhouse on @date has been cancelled.', [
+        '@date' => $params['date'],
+      ], $options);
       break;
 
     case 'custom_slot_request':
@@ -66,9 +67,8 @@ function clubhouse_booking_mail($key, &$message, $params) {
         '@name' => $params['user_name'],
         '@email' => $params['user_email'],
       ], $options);
-      $message['body'][] = t('Requested period: @start to @end', [
-        '@start' => $params['start'],
-        '@end' => $params['end'],
+      $message['body'][] = t('Requested date: @date', [
+        '@date' => $params['date'],
       ], $options);
       $message['body'][] = t('Message: @message', ['@message' => $params['message']], $options);
       break;

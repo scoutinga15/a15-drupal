@@ -30,11 +30,11 @@ class CancelBookingForm extends ConfirmFormBase {
   protected $mailManager;
 
   /**
-   * The booking ID to cancel.
+   * The slot ID to cancel.
    *
    * @var int
    */
-  protected $bookingId;
+  protected $slotId;
 
   /**
    * Constructs a new CancelBookingForm.
@@ -83,8 +83,8 @@ class CancelBookingForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, $booking_id = NULL) {
-    $this->bookingId = $booking_id;
+  public function buildForm(array $form, FormStateInterface $form_state, $slot_id = NULL) {
+    $this->slotId = $slot_id;
     return parent::buildForm($form, $form_state);
   }
 
@@ -92,28 +92,28 @@ class CancelBookingForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $booking = $this->database->select('clubhouse_bookings', 'b')
-      ->fields('b')
-      ->condition('id', $this->bookingId)
+    $slot = $this->database->select('clubhouse_slots', 's')
+      ->fields('s')
+      ->condition('id', $this->slotId)
       ->execute()
       ->fetchObject();
 
-    if ($booking) {
-      $this->database->delete('clubhouse_bookings')
-        ->condition('id', $this->bookingId)
-        ->execute();
-
-      $this->database->update('clubhouse_slots')
-        ->fields(['is_booked' => 0])
-        ->condition('id', $booking->slot_id)
+    if ($slot && in_array($slot->status, ['requested', 'reserved', 'booked'])) {
+      $this->database->delete('clubhouse_slots')
+        ->condition('id', $this->slotId)
         ->execute();
 
       // Send cancellation email.
       $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $date_string = $slot->booking_date;
+      if ($slot->to_date && $slot->to_date != $slot->booking_date) {
+        $date_string .= ' - ' . $slot->to_date;
+      }
       $params = [
-        'user_name' => $booking->user_name,
+        'user_name' => $slot->user_name,
+        'date' => $date_string,
       ];
-      $this->mailManager->mail('clubhouse_booking', 'booking_cancellation', $booking->user_email, $langcode, $params);
+      $this->mailManager->mail('clubhouse_booking', 'booking_cancellation', $slot->user_email, $langcode, $params);
 
       $this->messenger()->addStatus($this->t('Your booking has been cancelled.'));
     }

@@ -63,13 +63,37 @@ class BookingController extends ControllerBase {
 
     $events = [];
     foreach ($slots as $slot) {
+      $color = '#00ff00'; // Default free
+      $title = $this->t('Free Slot');
+
+      switch ($slot->status) {
+        case 'requested':
+          $color = '#ffff00';
+          $title = $this->t('Requested');
+          break;
+        case 'reserved':
+          $color = '#ffa500';
+          $title = $this->t('Reserved');
+          break;
+        case 'booked':
+          $color = '#ff0000';
+          $title = $this->t('Booked');
+          break;
+      }
+
+      $to_date = $slot->to_date ?: $slot->booking_date;
+      // FullCalendar expects 'start'/'end' and allDay events use exclusive end date.
+      $end_date = date('Y-m-d', strtotime($to_date . ' +1 day'));
       $events[] = [
         'id' => $slot->id,
-        'title' => $slot->is_booked ? $this->t('Booked') : $this->t('Free Slot'),
-        'from' => date('c', $slot->start_time),
-        'to' => date('c', $slot->end_time),
-        'color' => $slot->is_booked ? '#ff0000' : '#00ff00',
-        'is_booked' => (bool) $slot->is_booked,
+        'title' => $title,
+        'start' => $slot->booking_date,
+        'end' => $end_date,
+        'allDay' => TRUE,
+        'color' => $color,
+        'extendedProps' => [
+          'status' => $slot->status,
+        ],
       ];
     }
 

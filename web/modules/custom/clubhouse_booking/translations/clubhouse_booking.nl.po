@@ -1,128 +1,163 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Clubhouse Booking\n"
-"POT-Creation-Date: 2026-03-17 15:50+0000\n"
-"PO-Revision-Date: 2026-03-17 15:50+0000\n"
-"Last-Translator: Junie\n"
-"Language-Team: Dutch\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl\n"
 
-msgid "Clubhouse Booking Calendar"
-msgstr "Clubhuis Reserveringskalender"
+msgid "Free Slot"
+msgstr "Vrije plek"
 
-msgid "Book a Slot"
-msgstr "Reserveer een plek"
+msgid "Requested"
+msgstr "Aangevraagd"
 
-msgid "Cancel Booking"
-msgstr "Reservering annuleren"
+msgid "Reserved"
+msgstr "Gereserveerd"
 
-msgid "Request Custom Slot"
-msgstr "Aangepaste plek aanvragen"
-
-msgid "Add Free Slot"
-msgstr "Vrije plek toevoegen"
-
-msgid "Are you sure you want to cancel this booking?"
-msgstr "Weet je zeker dat je deze reservering wilt annuleren?"
-
-msgid "Your booking has been cancelled."
-msgstr "Je reservering is geannuleerd."
-
-msgid "Start Time"
-msgstr "Begintijd"
-
-msgid "End Time"
-msgstr "Eindtijd"
-
-msgid "Add Slot"
-msgstr "Plek toevoegen"
-
-msgid "End time must be after start time."
-msgstr "Eindtijd moet na de begintijd liggen."
-
-msgid "Free slot added."
-msgstr "Vrije plek toegevoegd."
-
-msgid "Booking for: @start to @end"
-msgstr "Reservering voor: @start tot @end"
+msgid "Booked"
+msgstr "Geboekt"
 
 msgid "Your Name"
-msgstr "Jouw naam"
+msgstr "Uw naam"
 
 msgid "Your Email"
-msgstr "Jouw e-mailadres"
+msgstr "Uw e-mailadres"
 
-msgid "Confirm Booking"
-msgstr "Reservering bevestigen"
-
-msgid "Your booking has been confirmed!"
-msgstr "Je reservering is bevestigd!"
-
-msgid "Requested Start Time"
-msgstr "Aangevraagde begintijd"
-
-msgid "Requested End Time"
-msgstr "Aangevraagde eindtijd"
+msgid "Requested Date"
+msgstr "Aangevraagde datum"
 
 msgid "Additional Information"
 msgstr "Aanvullende informatie"
 
-msgid "Why do you need this custom slot?"
-msgstr "Waarom heb je deze aangepaste plek nodig?"
-
 msgid "Request Slot"
 msgstr "Plek aanvragen"
 
-msgid "Start time cannot be in the past."
-msgstr "Begintijd kan niet in het verleden liggen."
+msgid "Confirm Booking"
+msgstr "Boeking bevestigen"
+
+msgid "Booking for: @date"
+msgstr "Boeking voor: @date"
+
+msgid "Your booking has been confirmed!"
+msgstr "Uw boeking is bevestigd!"
+
+msgid "Your booking has been cancelled."
+msgstr "Uw boeking is geannuleerd."
+
+msgid "Manage Clubhouse Slots"
+msgstr "Beheer clubhuis plekken"
+
+msgid "Add Slot"
+msgstr "Plek toevoegen"
+
+msgid "Edit Slot"
+msgstr "Plek bewerken"
+
+msgid "Delete Slot"
+msgstr "Plek verwijderen"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "User Name"
+msgstr "Gebruikersnaam"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Operations"
+msgstr "Acties"
+
+msgid "No slots found."
+msgstr "Geen plekken gevonden."
+
+msgid "Free"
+msgstr "Vrij"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "Are you sure you want to delete this slot?"
+msgstr "Weet u zeker dat u deze plek wilt verwijderen?"
+
+msgid "Are you sure you want to cancel this booking?"
+msgstr "Weet u zeker dat u deze boeking wilt annuleren?"
+
+msgid "Request Custom Slot"
+msgstr "Aangepaste plek aanvragen"
+
+msgid "This slot is already @status."
+msgstr "Deze plek is al @status."
+
+msgid "From Date"
+msgstr "Vanaf datum"
+
+msgid "To Date"
+msgstr "Tot en met datum"
+
+msgid "End date cannot be before start date."
+msgstr "Einddatum kan niet vóór de startdatum liggen."
+
+msgid "Requested date cannot be in the past."
+msgstr "Aangevraagde datum kan niet in het verleden liggen."
 
 msgid "Your request for a custom slot has been sent to the administrator."
-msgstr "Je aanvraag voor een aangepaste plek is verzonden naar de beheerder."
+msgstr "Uw aanvraag voor een aangepaste plek is verzonden naar de beheerder."
 
-msgid "Booked"
-msgstr "Gereserveerd"
+msgid "Save"
+msgstr "Opslaan"
 
-msgid "Free Slot"
-msgstr "Vrije plek"
+msgid "Slot created."
+msgstr "Plek aangemaakt."
 
-msgid "Already booked"
-msgstr "Al gereserveerd"
+msgid "Slot updated."
+msgstr "Plek bijgewerkt."
 
-msgid "Click to book this slot"
-msgstr "Klik om deze plek te reserveren"
+msgid "Slot deleted."
+msgstr "Plek verwijderd."
 
-msgid "This slot is already booked."
-msgstr "Deze plek is al gereserveerd."
+msgid "Clubhouse Bookings"
+msgstr "Clubhuis boekingen"
 
-msgid "Booking Confirmation: Clubhouse"
-msgstr "Reserveringsbevestiging: Clubhuis"
+msgid "Your booking for the clubhouse on @date has been cancelled."
+msgstr "Uw boeking voor het clubhuis op @date is geannuleerd."
 
 msgid "Hello @name,"
 msgstr "Hallo @name,"
 
-msgid "Your booking for the clubhouse from @start to @end has been confirmed."
-msgstr "Je reservering voor het clubhuis van @start tot @end is bevestigd."
+msgid "Your booking for the clubhouse on @date has been confirmed."
+msgstr "Uw boeking voor het clubhuis op @date is bevestigd."
 
 msgid "You can cancel your booking using the following link: @url"
-msgstr "Je kunt je reservering annuleren via de volgende link: @url"
+msgstr "U kunt uw boeking annuleren via de volgende link: @url"
+
+msgid "Booking Confirmation: Clubhouse"
+msgstr "Bevestiging boeking: Clubhuis"
 
 msgid "Booking Cancellation: Clubhouse"
-msgstr "Reserveringsannulering: Clubhuis"
-
-msgid "Your booking for the clubhouse has been cancelled."
-msgstr "Je reservering voor het clubhuis is geannuleerd."
+msgstr "Annulering boeking: Clubhuis"
 
 msgid "New Custom Slot Request"
-msgstr "Nieuwe aanvraag voor aangepaste plek"
+msgstr "Nieuwe aanvraag aangepaste plek"
 
 msgid "A new custom slot request has been submitted by @name (@email)."
 msgstr "Een nieuwe aanvraag voor een aangepaste plek is ingediend door @name (@email)."
 
-msgid "Requested period: @start to @end"
-msgstr "Aangevraagde periode: @start tot @end"
+msgid "Requested date: @date"
+msgstr "Aangevraagde datum: @date"
 
 msgid "Message: @message"
 msgstr "Bericht: @message"
+
+msgid "Requested"
+msgstr "Aangevraagd"
+
+msgid "Reserved"
+msgstr "Gereserveerd"
+
+msgid "Booked"
+msgstr "Geboekt"
