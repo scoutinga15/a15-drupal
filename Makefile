@@ -16,25 +16,25 @@ help:
 	@echo "  test      Run PHPUnit tests"
 
 up:
-	docker-compose up -d
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
 down:
-	docker-compose down
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml down
 
 build:
-	docker-compose up -d --build
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --build
 
 shell:
-	docker-compose exec drupal bash
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal bash
 
 drush:
-	docker-compose exec drupal vendor/bin/drush $(cmd)
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal vendor/bin/drush $(cmd)
 
 install:
-	docker-compose exec drupal composer install
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal composer install
 
 cr:
-	docker-compose exec drupal vendor/bin/drush cr
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal vendor/bin/drush cr
 
 test:
-	docker-compose exec drupal ./vendor/bin/phpunit tests/
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal ./vendor/bin/phpunit tests/
