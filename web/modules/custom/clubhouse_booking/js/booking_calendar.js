@@ -3,8 +3,10 @@
     attach: function (context, settings) {
       $(context).find('#calendar').once('clubhouseBookingCalendar').each(function () {
         var calendarEl = this;
+        var locale = drupalSettings.clubhouseBooking ? drupalSettings.clubhouseBooking.language : 'nl';
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
+          locale: locale,
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -30,7 +32,7 @@
 
         // Add Request Custom Slot button below the calendar
         var $requestButton = $('<div class="calendar-actions"><a href="/clubhouse/request-custom-slot" class="button">' + Drupal.t('Request Custom Slot') + '</a></div>');
-        $(calendarEl).after($requestButton);
+        $(calendarEl).before($requestButton);
       });
     }
   };

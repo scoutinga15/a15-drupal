@@ -1,15 +1,16 @@
 fullcalendar:
   remote: https://fullcalendar.io/
-  version: 6.1.11
+  version: 6.1.20
   license:
     name: MIT
     url: https://github.com/fullcalendar/fullcalendar/blob/main/LICENSE.txt
     gpl-compatible: true
   js:
-    https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js: { type: external }
+    https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js: { type: external }
+    https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.20/locales/nl.global.min.js: { type: external }
   css:
     theme:
-      https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css: { type: external }
+      https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.css: { type: external }
 booking_calendar:
   js:
     js/booking_calendar.js: {}

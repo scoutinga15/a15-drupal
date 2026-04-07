@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 
 /**
  * Controller for the clubhouse booking system.
@@ -20,13 +21,23 @@ class BookingController extends ControllerBase {
   protected $database;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * Constructs a new BookingController.
    *
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   The language manager.
    */
-  public function __construct(Connection $database) {
+  public function __construct(Connection $database, LanguageManagerInterface $language_manager) {
     $this->database = $database;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -34,7 +45,8 @@ class BookingController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('database')
+      $container->get('database'),
+      $container->get('language_manager')
     );
   }
 
@@ -47,6 +59,11 @@ class BookingController extends ControllerBase {
       '#attached' => [
         'library' => [
           'clubhouse_booking/booking_calendar',
+        ],
+        'drupalSettings' => [
+          'clubhouseBooking' => [
+            'language' => $this->languageManager->getCurrentLanguage()->getId(),
+          ],
         ],
       ],
     ];

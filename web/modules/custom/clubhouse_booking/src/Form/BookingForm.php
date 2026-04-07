@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Language\LanguageManagerInterface;
 
 /**
  * Provides a booking form.
@@ -31,16 +32,26 @@ class BookingForm extends FormBase {
   protected $mailManager;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * Constructs a new BookingForm.
    *
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
    * @param \Drupal\Core\Mail\MailManagerInterface $mail_manager
    *   The mail manager.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   The language manager.
    */
-  public function __construct(Connection $database, MailManagerInterface $mail_manager) {
+  public function __construct(Connection $database, MailManagerInterface $mail_manager, LanguageManagerInterface $language_manager) {
     $this->database = $database;
     $this->mailManager = $mail_manager;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -49,7 +60,8 @@ class BookingForm extends FormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('database'),
-      $container->get('plugin.manager.mail')
+      $container->get('plugin.manager.mail'),
+      $container->get('language_manager')
     );
   }
 
@@ -125,7 +137,7 @@ class BookingForm extends FormBase {
       ->fields([
         'user_name' => $name,
         'user_email' => $email,
-        'status' => 'booked',
+        'status' => 'reserved',
         'created' => time(),
       ])
       ->condition('id', $slot_id)
@@ -138,7 +150,7 @@ class BookingForm extends FormBase {
       ->fetchObject();
 
     // Send email notification.
-    $langcode = $this->languageManager()->getCurrentLanguage()->getId();
+    $langcode = $this->languageManager->getCurrentLanguage()->getId();
     $date_string = $slot->booking_date;
     if ($slot->to_date && $slot->to_date != $slot->booking_date) {
       $date_string .= ' - ' . $slot->to_date;

@@ -8,7 +8,8 @@
 
 .calendar-actions {
   margin-top: 20px;
-  text-align: right;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .calendar-actions .button {

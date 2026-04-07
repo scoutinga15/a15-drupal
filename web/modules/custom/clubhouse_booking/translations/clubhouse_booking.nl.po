@@ -81,6 +81,18 @@ msgstr "Vrij"
 msgid "Message"
 msgstr "Bericht"
 
+msgid "Filters"
+msgstr "Filters"
+
+msgid "- All -"
+msgstr "- Alle -"
+
+msgid "Filter"
+msgstr "Filteren"
+
+msgid "Reset"
+msgstr "Resetten"
+
 msgid "Are you sure you want to delete this slot?"
 msgstr "Weet u zeker dat u deze plek wilt verwijderen?"
 

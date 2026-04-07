@@ -54,6 +54,16 @@ class BookingAdminController extends ControllerBase {
       ->extend('\Drupal\Core\Database\Query\TableSortExtender')
       ->orderByHeader($header);
 
+    // Filter by status if provided in the query string.
+    $status_filter = \Drupal::request()->query->get('status');
+    if ($status_filter !== NULL && $status_filter !== '') {
+      $query->condition('status', $status_filter);
+    }
+    // Default filter by booked slots (booked and reserved) if no status filter is provided.
+    elseif (!\Drupal::request()->query->has('status')) {
+      $query->condition('status', ['booked', 'reserved'], 'IN');
+    }
+
     // Default sort by upcoming dates ascending if no sort is specified.
     if (!\Drupal::request()->query->has('sort')) {
       $query->orderBy('booking_date', 'ASC');
@@ -87,6 +97,8 @@ class BookingAdminController extends ControllerBase {
         ],
       ];
     }
+
+    $build['filter_form'] = $this->formBuilder()->getForm('\Drupal\clubhouse_booking\Form\BookingFilterForm');
 
     $build['table'] = [
       '#type' => 'table',
