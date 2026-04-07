@@ -1,0 +1,17 @@
+services:
+  drupal:
+    ports:
+      - 8081:80
+    volumes:
+      - ./web/modules/custom:/opt/drupal/web/modules/custom
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "127.0.0.1:3309:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
