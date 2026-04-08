@@ -114,9 +114,11 @@ When developing modules, ensure they follow Drupal's best practices and coding s
 - Free slots en booked slots should be highlighted
 - Admins users should be able to create free slots
 - Guests should be able to book free slots and request custom slots (with a form)
+- Admin must be able to approve a booking and set it as booked and change dates eventually.
 - Bookings should have a status field with (requested, reserved, booked). Reserved and booked slots should be visible to the public in the calendar.
 - Bookings are always a rang of dates (from and to) without time.
 - They should be able to cancel their booking and receice a confirmation email
+- admins should receive all booking requests and approvals on verhuur@scoutinga15.nl
 - The booking should be saved in the database
 - The booking should be removed from the database when the user cancels the booking
 - The booking module should be used in the platform as a paragraph type
@@ -128,3 +130,4 @@ When developing modules, ensure they follow Drupal's best practices and coding s
 - Slots should be requested and created by day without time.
 - Admin functionality should be avaiable from backend menu under content.
 - A separate paragraph block with a list showing all free slots in the future grouped by month.
+- select a date range on the calendar to create a booking request.

@@ -54,7 +54,7 @@ class DeleteSlotForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Are you sure you want to delete this slot?');
+    return $this->t('Are you sure you want to delete this date?');
   }
 
   /**
@@ -80,7 +80,7 @@ class DeleteSlotForm extends ConfirmFormBase {
       ->condition('id', $this->slotId)
       ->execute();
 
-    $this->messenger()->addStatus($this->t('Slot deleted.'));
+    $this->messenger()->addStatus($this->t('Date deleted.'));
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 

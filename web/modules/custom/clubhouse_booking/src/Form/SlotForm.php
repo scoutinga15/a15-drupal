@@ -62,14 +62,14 @@ class SlotForm extends FormBase {
 
     $form['booking_date'] = [
       '#type' => 'date',
-      '#title' => $this->t('From Date'),
+      '#title' => $this->t('From date'),
       '#required' => TRUE,
       '#default_value' => $slot ? $slot->booking_date : '',
     ];
 
     $form['to_date'] = [
       '#type' => 'date',
-      '#title' => $this->t('To Date'),
+      '#title' => $this->t('To date'),
       '#required' => FALSE,
       '#default_value' => $slot ? $slot->to_date : '',
     ];
@@ -89,13 +89,13 @@ class SlotForm extends FormBase {
 
     $form['user_name'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('User Name'),
+      '#title' => $this->t('Name'),
       '#default_value' => $slot ? $slot->user_name : '',
     ];
 
     $form['user_email'] = [
       '#type' => 'email',
-      '#title' => $this->t('User Email'),
+      '#title' => $this->t('Email address'),
       '#default_value' => $slot ? $slot->user_email : '',
     ];
 

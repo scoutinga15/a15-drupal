@@ -41,11 +41,11 @@ class BookingAdminController extends ControllerBase {
    */
   public function slotsList() {
     $header = [
-      ['data' => $this->t('From Date'), 'field' => 'booking_date', 'sort' => 'asc'],
-      ['data' => $this->t('To Date'), 'field' => 'to_date'],
+      ['data' => $this->t('From date'), 'field' => 'booking_date', 'sort' => 'asc'],
+      ['data' => $this->t('To date'), 'field' => 'to_date'],
       ['data' => $this->t('Status'), 'field' => 'status'],
-      ['data' => $this->t('User Name')],
-      ['data' => $this->t('Email')],
+      ['data' => $this->t('Name')],
+      ['data' => $this->t('Email address')],
       ['data' => $this->t('Operations')],
     ];
 
@@ -104,12 +104,12 @@ class BookingAdminController extends ControllerBase {
       '#type' => 'table',
       '#header' => $header,
       '#rows' => $rows,
-      '#empty' => $this->t('No slots found.'),
+      '#empty' => $this->t('No dates found.'),
     ];
 
     $build['add_link'] = [
       '#type' => 'link',
-      '#title' => $this->t('Add Slot'),
+      '#title' => $this->t('Add date'),
       '#url' => Url::fromRoute('clubhouse_booking.add_slot'),
       '#attributes' => ['class' => ['button', 'button--primary']],
       '#weight' => -10,

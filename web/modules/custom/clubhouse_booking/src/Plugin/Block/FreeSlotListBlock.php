@@ -81,7 +81,7 @@ class FreeSlotListBlock extends BlockBase implements ContainerFactoryPluginInter
 
     if (empty($results)) {
       return [
-        '#markup' => $this->t('Geen vrije momenten gevonden in de toekomst.'),
+        '#markup' => $this->t('No future free slots found.'),
       ];
     }
 
@@ -101,7 +101,7 @@ class FreeSlotListBlock extends BlockBase implements ContainerFactoryPluginInter
 
         if ($slot->to_date && $slot->to_date != $slot->booking_date) {
           $end_timestamp = strtotime($slot->to_date);
-          $date_string = $this->t('@start t/m @end', [
+          $date_string = $this->t('@start until @end', [
             '@start' => $this->dateFormatter->format($start_timestamp, 'custom', 'j F Y'),
             '@end' => $this->dateFormatter->format($end_timestamp, 'custom', 'j F Y'),
           ]);
@@ -122,7 +122,7 @@ class FreeSlotListBlock extends BlockBase implements ContainerFactoryPluginInter
     return [
       '#theme' => 'item_list',
       '#items' => $items,
-      '#title' => $this->t('Aankomende beschikbare data (afwijkingen aan te vragen)'),
+      '#title' => $this->t('Upcoming available dates (requests for others possible)'),
     ];
   }
 

@@ -104,13 +104,13 @@ class BookingForm extends FormBase {
 
     $form['name'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Your Name'),
+      '#title' => $this->t('Name'),
       '#required' => TRUE,
     ];
 
     $form['email'] = [
       '#type' => 'email',
-      '#title' => $this->t('Your Email'),
+      '#title' => $this->t('Email address'),
       '#required' => TRUE,
     ];
 
@@ -119,7 +119,7 @@ class BookingForm extends FormBase {
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Confirm Booking'),
+      '#value' => $this->t('Confirm booking'),
     ];
 
     return $form;
@@ -149,7 +149,7 @@ class BookingForm extends FormBase {
       ->execute()
       ->fetchObject();
 
-    // Send email notification.
+    // Send email notification to user.
     $langcode = $this->languageManager->getCurrentLanguage()->getId();
     $date_string = $slot->booking_date;
     if ($slot->to_date && $slot->to_date != $slot->booking_date) {
@@ -162,6 +162,10 @@ class BookingForm extends FormBase {
       'cancel_url' => Url::fromRoute('clubhouse_booking.cancel', ['slot_id' => $slot_id], ['absolute' => TRUE])->toString(),
     ];
     $this->mailManager->mail('clubhouse_booking', 'booking_confirmation', $email, $langcode, $params);
+
+    // Notify the admin.
+    $admin_email = 'verhuur@scoutinga15.nl';
+    $this->mailManager->mail('clubhouse_booking', 'admin_booking_notification', $admin_email, $langcode, $params);
 
     $this->messenger()->addStatus($this->t('Your booking has been confirmed!'));
     $form_state->setRedirect('clubhouse_booking.calendar');

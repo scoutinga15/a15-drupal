@@ -60,6 +60,17 @@ function clubhouse_booking_mail($key, &$message, $params) {
       ], $options);
       break;
 
+    case 'admin_booking_notification':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('New Booking: Clubhouse');
+      $message['body'][] = t('A new booking has been made by @name.', [
+        '@name' => $params['user_name'],
+      ], $options);
+      $message['body'][] = t('Booked date: @date', [
+        '@date' => $params['date'],
+      ], $options);
+      break;
+
     case 'booking_cancellation':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('Booking Cancellation: Clubhouse');
@@ -69,10 +80,19 @@ function clubhouse_booking_mail($key, &$message, $params) {
       ], $options);
       break;
 
+    case 'admin_cancellation_notification':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Booking Cancellation: Clubhouse');
+      $message['body'][] = t('The booking for @date by @name has been cancelled.', [
+        '@name' => $params['user_name'],
+        '@date' => $params['date'],
+      ], $options);
+      break;
+
     case 'custom_slot_request':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('New Custom Slot Request');
-      $message['body'][] = t('A new custom slot request has been submitted by @name (@email).', [
+      $message['subject'] = t('New Date Request');
+      $message['body'][] = t('A new date request has been submitted by @name (@email).', [
         '@name' => $params['user_name'],
         '@email' => $params['user_email'],
       ], $options);

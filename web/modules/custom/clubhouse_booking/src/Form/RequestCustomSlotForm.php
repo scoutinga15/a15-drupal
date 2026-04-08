@@ -62,34 +62,40 @@ class RequestCustomSlotForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $request = \Drupal::request();
+    $default_start = $request->query->get('start');
+    $default_end = $request->query->get('end');
+
     $form['name'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Your Name'),
+      '#title' => $this->t('Name'),
       '#required' => TRUE,
     ];
 
     $form['email'] = [
       '#type' => 'email',
-      '#title' => $this->t('Your Email'),
+      '#title' => $this->t('Email address'),
       '#required' => TRUE,
     ];
 
     $form['booking_date'] = [
       '#type' => 'date',
-      '#title' => $this->t('From Date'),
+      '#title' => $this->t('From date'),
       '#required' => TRUE,
+      '#default_value' => $default_start,
     ];
 
     $form['to_date'] = [
       '#type' => 'date',
-      '#title' => $this->t('To Date'),
+      '#title' => $this->t('To date'),
       '#required' => TRUE,
+      '#default_value' => $default_end,
     ];
 
     $form['message'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Additional Information'),
-      '#description' => $this->t('Why do you need this custom slot?'),
+      '#title' => $this->t('Extra information'),
+      '#description' => $this->t('Why do you need this date?'),
     ];
 
     $form['actions'] = [
@@ -97,7 +103,7 @@ class RequestCustomSlotForm extends FormBase {
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Request Slot'),
+      '#value' => $this->t('Request'),
     ];
 
     return $form;
@@ -141,7 +147,7 @@ class RequestCustomSlotForm extends FormBase {
       ->execute();
 
     // Notify the admin.
-    $admin_email = \Drupal::config('system.site')->get('mail');
+    $admin_email = 'verhuur@scoutinga15.nl';
     $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     $params = [
@@ -153,7 +159,7 @@ class RequestCustomSlotForm extends FormBase {
 
     $this->mailManager->mail('clubhouse_booking', 'custom_slot_request', $admin_email, $langcode, $params);
 
-    $this->messenger()->addStatus($this->t('Your request for a custom slot has been sent to the administrator.'));
+    $this->messenger()->addStatus($this->t('Your request for another date has been sent to the administrator.'));
     $form_state->setRedirect('clubhouse_booking.calendar');
   }
 

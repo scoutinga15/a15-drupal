@@ -103,7 +103,7 @@ class CancelBookingForm extends ConfirmFormBase {
         ->condition('id', $this->slotId)
         ->execute();
 
-      // Send cancellation email.
+      // Send cancellation email to user.
       $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
       $date_string = $slot->booking_date;
       if ($slot->to_date && $slot->to_date != $slot->booking_date) {
@@ -114,6 +114,10 @@ class CancelBookingForm extends ConfirmFormBase {
         'date' => $date_string,
       ];
       $this->mailManager->mail('clubhouse_booking', 'booking_cancellation', $slot->user_email, $langcode, $params);
+
+      // Notify the admin.
+      $admin_email = 'verhuur@scoutinga15.nl';
+      $this->mailManager->mail('clubhouse_booking', 'admin_cancellation_notification', $admin_email, $langcode, $params);
 
       $this->messenger()->addStatus($this->t('Your booking has been cancelled.'));
     }

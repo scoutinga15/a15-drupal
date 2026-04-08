@@ -1,9 +1,7 @@
-langcode: nl
-status: true
-dependencies: {  }
+langcode: en
 id: clubhouse_booking_free_slot_list
-label: 'Lijst met vrije clubhuis momenten'
+label: 'Clubhouse Free Slot List'
 icon_uuid: null
 icon_default: null
-description: 'Toont een lijst met aankomende vrije momenten van het clubhuis, gegroepeerd per maand.'
+description: 'Shows a list of upcoming free slots for the clubhouse, grouped by month.'
 behavior_plugins: {  }
