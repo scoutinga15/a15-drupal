@@ -25,6 +25,11 @@ class BookingCalendarBlock extends BlockBase {
         'library' => [
           'clubhouse_booking/booking_calendar',
         ],
+        'drupalSettings' => [
+          'clubhouseBooking' => [
+            'language' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
+          ],
+        ],
       ],
     ];
   }

@@ -16,6 +16,9 @@ function clubhouse_booking_theme($existing, $type, $theme, $path) {
     'paragraph__clubhouse_booking' => [
       'base hook' => 'paragraph',
     ],
+    'paragraph__clubhouse_booking_free_slot_list' => [
+      'base hook' => 'paragraph',
+    ],
   ];
 }
 
@@ -27,6 +30,12 @@ function clubhouse_booking_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   if ($paragraph->getType() === 'clubhouse_booking') {
     $variables['#attached']['library'][] = 'clubhouse_booking/booking_calendar';
+    $variables['#attached']['drupalSettings']['clubhouseBooking']['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  }
+  elseif ($paragraph->getType() === 'clubhouse_booking_free_slot_list') {
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $block = $block_manager->createInstance('clubhouse_booking_free_slot_list_block', []);
+    $variables['content']['free_slot_list'] = $block->build();
   }
 }
 

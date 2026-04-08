@@ -5,7 +5,7 @@
         var calendarEl = this;
         var locale = drupalSettings.clubhouseBooking ? drupalSettings.clubhouseBooking.language : 'nl';
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
+          initialView: 'multiMonthYear',
           locale: locale,
           headerToolbar: {
             left: 'prev,next today',
