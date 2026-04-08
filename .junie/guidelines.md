@@ -131,3 +131,4 @@ When developing modules, ensure they follow Drupal's best practices and coding s
 - Admin functionality should be avaiable from backend menu under content.
 - A separate paragraph block with a list showing all free slots in the future grouped by month.
 - select a date range on the calendar to create a booking request.
+- Module must contain an up-to-date dutch module readme.md
