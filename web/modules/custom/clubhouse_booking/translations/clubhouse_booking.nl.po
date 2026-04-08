@@ -165,11 +165,92 @@ msgstr "Aangevraagde datum: @date"
 msgid "Message: @message"
 msgstr "Bericht: @message"
 
-msgid "Requested"
-msgstr "Aangevraagd"
+msgid "Name"
+msgstr "Naam"
 
-msgid "Reserved"
-msgstr "Gereserveerd"
+msgid "Email address"
+msgstr "E-mailadres"
 
-msgid "Booked"
-msgstr "Geboekt"
+msgid "Confirm booking"
+msgstr "Boeking bevestigen"
+
+msgid "Failed to load calendar events."
+msgstr "Fout bij het laden van agenda-items."
+
+msgid "This date is already @status."
+msgstr "Deze datum is al @status."
+
+msgid "Request another date"
+msgstr "Nog een datum aanvragen"
+
+msgid "From date"
+msgstr "Vanaf datum"
+
+msgid "To date"
+msgstr "Tot en met datum"
+
+msgid "No dates found."
+msgstr "Geen datums gevonden."
+
+msgid "Add date"
+msgstr "Datum toevoegen"
+
+msgid "Edit"
+msgstr "Bewerken"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Start Time"
+msgstr "Starttijd"
+
+msgid "End Time"
+msgstr "Eindtijd"
+
+msgid "End time must be after start time."
+msgstr "Eindtijd moet na de starttijd liggen."
+
+msgid "Free slot added."
+msgstr "Vrije plek toegevoegd."
+
+msgid "No future free slots found."
+msgstr "Geen toekomstige vrije plekken gevonden."
+
+msgid "@start until @end"
+msgstr "@start tot @end"
+
+msgid "Upcoming available dates (requests for others possible)"
+msgstr "Komende beschikbare datums (aanvragen voor andere mogelijk)"
+
+msgid "Extra information"
+msgstr "Extra informatie"
+
+msgid "Why do you need this date?"
+msgstr "Waarom heb je deze datum nodig?"
+
+msgid "Your request for another date has been sent to the administrator."
+msgstr "Je aanvraag voor een andere datum is verzonden naar de beheerder."
+
+msgid "New Date Request"
+msgstr "Nieuwe datum aanvraag"
+
+msgid "A new date request has been submitted by @name (@email)."
+msgstr "Een nieuwe datum aanvraag is ingediend door @name (@email)."
+
+msgid "New Booking: Clubhouse"
+msgstr "Nieuwe boeking: Clubhuis"
+
+msgid "A new booking has been made by @name."
+msgstr "Er is een nieuwe boeking gemaakt door @name."
+
+msgid "Booked date: @date"
+msgstr "Geboekte datum: @date"
+
+msgid "The booking for @date by @name has been cancelled."
+msgstr "De boeking voor @date door @name is geannuleerd."
+
+msgid "Date deleted."
+msgstr "Datum verwijderd."
+
+msgid "Are you sure you want to delete this date?"
+msgstr "Weet u zeker dat u deze datum wilt verwijderen?"
