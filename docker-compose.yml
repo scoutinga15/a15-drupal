@@ -13,6 +13,15 @@ services:
     restart: always
     volumes:
       - "${DRUPAL_FILES_PUBLIC}:/opt/drupal/web/sites/default/files"
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
 
 networks:
   default:
