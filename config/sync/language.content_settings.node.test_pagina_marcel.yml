@@ -1,0 +1,11 @@
+uuid: b85167b2-1283-42d5-b783-21c697377336
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.test_pagina_marcel
+id: node.test_pagina_marcel
+target_entity_type_id: node
+target_bundle: test_pagina_marcel
+default_langcode: site_default
+language_alterable: false

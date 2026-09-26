@@ -1,0 +1,18 @@
+uuid: cb71ee15-a573-4ad6-8a85-85ddf6ef0573
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'test pagina marcel'
+type: test_pagina_marcel
+description: 'calender testpagina'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

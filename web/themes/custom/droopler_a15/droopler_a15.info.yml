@@ -2,7 +2,7 @@ name: SCSS droopler_a15 for Droopler
 type: theme
 description: 'Copy this theme and make your own. This is a simple starter kit for you. Read the instructions in README.md before you start.'
 version: 8.x-2.0
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 
 base theme: droopler_theme
 

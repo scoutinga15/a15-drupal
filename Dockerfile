@@ -1,4 +1,4 @@
-FROM php:7.4-apache-buster
+FROM php:8.1-apache-bookworm
 
 # install the PHP extensions we need
 RUN set -eux; \
@@ -34,9 +34,9 @@ RUN set -eux; \
 	apt-mark auto '.*' > /dev/null; \
 	apt-mark manual $savedAptMark; \
 	ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
-		| awk '/=>/ { print $3 }' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
 		| sort -u \
-		| xargs -r dpkg-query -S \
+		| xargs -r dpkg-query --search \
 		| cut -d: -f1 \
 		| sort -u \
 		| xargs -rt apt-mark manual; \
@@ -64,6 +64,7 @@ RUN { \
     echo 'upload_max_filesize=200M'; \
     echo 'post_max_size=200M'; \
     echo 'max_execution_time=120'; \
+    echo 'memory_limit=512M'; \
   } > /usr/local/etc/php/conf.d/uploads.ini
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/
@@ -82,6 +83,7 @@ COPY drush drush/
 COPY composer.json .
 COPY composer.lock .
 COPY composer.patches.json .
+COPY patches patches/
 COPY web/assets web/assets/
 COPY web/themes web/themes/
 

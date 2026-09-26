@@ -806,9 +806,13 @@ $databases['default']['default'] = array (
   'prefix' => '',
   'host' => getenv('DRUPAL_DB_HOST'),
   'port' => getenv('DRUPAL_DB_PORT'),
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
+  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
   'driver' => 'mysql',
 );
+
+// Keep the SMTP password out of config/sync.
+$config['symfony_mailer_lite.symfony_mailer_lite_transport.smtp']['configuration']['pass'] = getenv('DRUPAL_SMTP_PASSWORD') ?: '';
 
 $settings['config_sync_directory'] = '../config/sync';
 

@@ -1,0 +1,12 @@
+uuid: 4efcace5-d677-4606-9bf8-c3793dc75a20
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: _FU_yuemTSNdfQaMhWTwTV3FvlxZG_a9AjTH1PzABLo
+id: clubhouse_booking_free_slot_list
+label: 'Clubhouse Free Slot List'
+icon_uuid: null
+icon_default: null
+description: 'Shows a list of upcoming free slots for the clubhouse, grouped by month.'
+behavior_plugins: {  }

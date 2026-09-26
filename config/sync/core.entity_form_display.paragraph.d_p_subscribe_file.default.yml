@@ -45,7 +45,7 @@ third_party_settings:
         - field_d_long_text
         - field_d_p_sf_additional_info
         - translation
-      label: Basis
+      label: Basic
       region: content
       parent_name: group_tabs
       weight: 20

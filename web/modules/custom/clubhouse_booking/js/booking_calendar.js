@@ -1,7 +1,7 @@
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, once) {
   Drupal.behaviors.clubhouseBookingCalendar = {
     attach: function (context, settings) {
-      $(context).find('#calendar').once('clubhouseBookingCalendar').each(function () {
+      $(once('clubhouseBookingCalendar', '#calendar', context)).each(function () {
         var calendarEl = this;
         var locale = drupalSettings.clubhouseBooking ? drupalSettings.clubhouseBooking.language : 'nl';
         var calendar;
@@ -73,4 +73,4 @@
       });
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);

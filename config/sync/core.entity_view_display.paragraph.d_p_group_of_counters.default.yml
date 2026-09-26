@@ -24,7 +24,6 @@ third_party_settings:
         - field_d_main_title
         - field_d_long_text
         - field_d_counter_reference
-        - field_d_cta_link
       label: 'Counters content'
       parent_name: ''
       region: content
@@ -47,6 +46,24 @@ third_party_settings:
       parent_name: ''
       region: content
       weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_counters_cta:
+      children:
+        - field_d_cta_link
+      label: 'Call To Action'
+      parent_name: ''
+      region: content
+      weight: 3
       format_type: html_element
       format_settings:
         classes: ''

@@ -4,12 +4,19 @@ status: true
 dependencies:
   config:
     - filter.format.full_html
+    - media.type.d_document
+    - media.type.d_image
+    - media.type.d_video
+    - media.type.video_local
     - node.type.content_page
     - taxonomy.vocabulary.tags
   module:
     - content_translation
+    - contextual
+    - file
     - filter
     - geysir
+    - media
     - node
     - paragraphs
     - system
@@ -23,13 +30,20 @@ weight: 3
 is_admin: null
 permissions:
   - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'administer nodes'
   - 'bypass node access'
   - 'create content translations'
   - 'create content_page content'
+  - 'create d_document media'
+  - 'create d_image media'
+  - 'create d_video media'
+  - 'create media'
   - 'create terms in tags'
+  - 'create video_local media'
   - 'delete all revisions'
   - 'delete any content_page content'
   - 'delete content translations'
@@ -37,6 +51,10 @@ permissions:
   - 'delete own content_page content'
   - 'delete terms in tags'
   - 'edit any content_page content'
+  - 'edit any d_document media'
+  - 'edit any d_image media'
+  - 'edit any d_video media'
+  - 'edit any video_local media'
   - 'edit own content_page content'
   - 'edit terms in tags'
   - 'geysir manage paragraphs from front-end'
@@ -45,6 +63,7 @@ permissions:
   - 'translate any entity'
   - 'translate content_page node'
   - 'translate paragraph'
+  - 'update any media'
   - 'update content translations'
   - 'use text format full_html'
   - 'view all revisions'

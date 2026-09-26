@@ -11,7 +11,7 @@ child-scripts:
     js/min/global.min.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once
     - core/drupal
 
 # Libraries for the SCSS version

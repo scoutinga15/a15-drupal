@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.storage.node.field_page_section
     - node.type.content_page
+    - paragraphs.paragraphs_type.clubhouse_booking
+    - paragraphs.paragraphs_type.clubhouse_booking_free_slot_list
     - paragraphs.paragraphs_type.d_p_banner
     - paragraphs.paragraphs_type.d_p_block
     - paragraphs.paragraphs_type.d_p_carousel
@@ -51,6 +53,8 @@ settings:
       d_p_subscribe_file: d_p_subscribe_file
       d_p_text_paged: d_p_text_paged
       d_p_text_with_bckg: d_p_text_with_bckg
+      clubhouse_booking: clubhouse_booking
+      clubhouse_booking_free_slot_list: clubhouse_booking_free_slot_list
       d_p_side_embed: d_p_side_embed
       d_p_side_tiles: d_p_side_tiles
       d_p_side_by_side: d_p_side_by_side
@@ -59,6 +63,12 @@ settings:
       from_library: from_library
     negate: 0
     target_bundles_drag_drop:
+      clubhouse_booking:
+        weight: 24
+        enabled: true
+      clubhouse_booking_free_slot_list:
+        weight: 25
+        enabled: true
       d_p_banner:
         weight: 13
         enabled: true

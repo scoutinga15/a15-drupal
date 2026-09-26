@@ -38,7 +38,7 @@ third_party_settings:
         - field_d_media_icon
         - field_d_long_text
         - field_d_cta_link
-      label: Basis
+      label: Basic
       region: content
       parent_name: group_tabs
       weight: 9

@@ -13,6 +13,65 @@ dependencies:
   module:
     - link
     - text
+    - field_group
+third_party_settings:
+  field_group:
+    group_d_tiles_content:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_long_text
+      label: 'Text content of paragraph'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_tiles_cta:
+      children:
+        - field_d_cta_link
+      label: 'CTA button'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_tiles_gallery:
+      children:
+        - field_d_media_image
+      label: 'Tiles gallery for masonry'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 _core:
   default_config_hash: 0JjztP_gOl9mcnjFLaGf9zM2dAjQ4Sv8UPhz2-9rkEQ
 id: paragraph.d_p_tiles.default

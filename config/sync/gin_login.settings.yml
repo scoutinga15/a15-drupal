@@ -4,4 +4,5 @@ langcode: nl
 logo:
   use_default: true
 brand_image:
-  use_default: true
+  use_default: false
+  path: 'public://20230504_223538.jpg'

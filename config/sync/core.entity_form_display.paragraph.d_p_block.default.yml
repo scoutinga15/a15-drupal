@@ -28,7 +28,7 @@ third_party_settings:
     group_basic:
       children:
         - field_block
-      label: Basis
+      label: Basic
       region: content
       parent_name: group_tabs
       weight: 5

@@ -158,7 +158,7 @@ display:
         options:
           submit_button: 'Filters toepassen'
           reset_button: false
-          reset_button_label: Reset
+          reset_button_label: Resetten
           exposed_sorts_label: 'Sort by'
           expose_sort_order: false
           sort_asc_label: Asc
@@ -1132,6 +1132,8 @@ display:
           settings:
             image_link: ''
             image_style: media_library
+            image_loading:
+              attribute: lazy
         name:
           id: name
           table: media_field_data

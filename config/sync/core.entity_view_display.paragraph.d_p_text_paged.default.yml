@@ -14,6 +14,48 @@ dependencies:
     - d_p
     - link
     - text
+    - field_group
+third_party_settings:
+  field_group:
+    group_d_text_paged_content:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_subtitle
+        - field_d_long_text
+      label: 'Text paged content'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_text_paged_cta:
+      children:
+        - field_d_cta_link
+      label: 'Call To Action'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 _core:
   default_config_hash: nQfDzaeN2iuR4j7m3ceO6QbiRMS1iaLkUJTtQhTx8zg
 id: paragraph.d_p_text_paged.default

@@ -29,7 +29,7 @@ third_party_settings:
       children:
         - field_d_display_mode
         - field_d_node_reference
-      label: Basis
+      label: Basic
       region: content
       parent_name: group_tabs
       weight: 20

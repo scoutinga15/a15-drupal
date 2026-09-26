@@ -1,0 +1,18 @@
+uuid: d5f777ce-c145-41e3-9f70-a55e5f0345e6
+langcode: nl
+status: true
+dependencies: {  }
+id: smtp
+label: SMTP
+plugin: smtp
+configuration:
+  user: admin@scoutinga15.nl
+  pass: ''
+  host: send.one.com
+  port: 25
+  query:
+    verify_peer: true
+    local_domain: ''
+    restart_threshold: null
+    restart_threshold_sleep: null
+    ping_threshold: null

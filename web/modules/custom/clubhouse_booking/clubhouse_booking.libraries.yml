@@ -22,3 +22,4 @@ booking_calendar:
     - core/drupal
     - core/jquery
     - core/drupalSettings
+    - core/once

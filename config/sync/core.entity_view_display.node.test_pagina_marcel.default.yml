@@ -1,0 +1,29 @@
+uuid: 4406f196-33ba-4ee0-847c-8b059dbac1b3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.test_pagina_marcel.body
+    - node.type.test_pagina_marcel
+  module:
+    - text
+    - user
+id: node.test_pagina_marcel.default
+targetEntityType: node
+bundle: test_pagina_marcel
+mode: default
+content:
+  body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

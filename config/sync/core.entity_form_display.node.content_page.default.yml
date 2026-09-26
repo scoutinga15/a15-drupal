@@ -72,7 +72,7 @@ third_party_settings:
         - field_header_cta
         - langcode
         - status
-      label: Basis
+      label: Basic
       region: content
       parent_name: group_tabs
       weight: 20

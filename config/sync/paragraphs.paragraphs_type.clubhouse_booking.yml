@@ -1,0 +1,12 @@
+uuid: 2059b59e-4068-45c3-933c-9132cb65bd72
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 35VFN4IPpZJH9SHPq2EEmju9OkXmNSXxm6DAUckb14Q
+id: clubhouse_booking
+label: 'Clubhouse Booking'
+icon_uuid: null
+icon_default: null
+description: 'Allows users to view and book clubhouse slots via a calendar.'
+behavior_plugins: {  }

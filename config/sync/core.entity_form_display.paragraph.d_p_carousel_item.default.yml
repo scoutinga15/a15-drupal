@@ -36,7 +36,7 @@ third_party_settings:
         - field_d_media_icon
         - field_d_long_text
         - field_d_cta_link
-      label: Basis
+      label: Basic
       region: content
       parent_name: group_tabs
       weight: 8
@@ -69,7 +69,7 @@ bundle: d_p_carousel_item
 mode: default
 content:
   field_d_cta_link:
-    type: link_default
+    type: link_attributes
     weight: 4
     region: content
     settings:

@@ -18,4 +18,4 @@ js_footer: null
 js_preprocess: true
 js_remove_console_log: true
 prefetch: null
-unified_multisite_dir: null
+unified_multisite_dir: ''

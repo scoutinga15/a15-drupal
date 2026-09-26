@@ -6,7 +6,6 @@ dependencies:
     - field.field.media.d_image.field_media_image
     - media.type.d_image
   module:
-    - lazy
     - svg_image
 _core:
   default_config_hash: JKkAc3uVPxGROg6WyEwGtTKoXKLceegUUNSUp1J1-uE
@@ -25,9 +24,9 @@ content:
         width: null
         height: null
       svg_render_as_image: true
-    third_party_settings:
-      lazy:
-        lazy_image: '1'
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:

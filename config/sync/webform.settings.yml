@@ -3,13 +3,15 @@ _core:
 langcode: nl
 settings:
   default_status: open
+  default_categories: {  }
+  default_page: true
   default_page_base_path: /form
   default_ajax: false
   default_ajax_progress_type: throbber
   default_ajax_effect: fade
   default_ajax_speed: 500
   default_submit_button_label: Submit
-  default_reset_button_label: Reset
+  default_reset_button_label: Resetten
   default_delete_button_label: Delete
   default_form_submit_once: false
   default_form_open_message: 'Dit formulier is nog niet geopend voor inzendingen.'
@@ -45,6 +47,7 @@ settings:
   default_draft_pending_multiple_message: 'U heeft openstaande concepten voor dit webformulier. <a href="#">Bekijk uw openstaande concepten</a>.'
   default_confirmation_message: 'Nieuwe inzending voor [webform:title] opgeslagen.'
   default_confirmation_back_label: 'Terug naar formulier'
+  default_confirmation_noindex: true
   default_limit_total_message: 'Geen nieuwe inzendingen toegestaan.'
   default_limit_user_message: 'Geen nieuwe inzendingen toegestaan.'
   default_submission_label: '[webform_submission:submitted-to]: Inzending #[webform_submission:serial]'
@@ -153,15 +156,13 @@ element:
   default_empty_option: true
   default_empty_option_required: ''
   default_empty_option_optional: ''
-  default_algolia_places_app_id: ''
-  default_algolia_places_api_key: ''
   excluded_elements:
     password: password
     password_confirm: password_confirm
 html_editor:
   disabled: false
-  element_format: ''
-  mail_format: ''
+  element_format: webform_default
+  mail_format: webform_default
   tidy: true
   make_unused_managed_files_temporary: true
 file:

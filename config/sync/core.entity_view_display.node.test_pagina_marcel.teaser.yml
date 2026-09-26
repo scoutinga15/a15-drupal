@@ -1,0 +1,23 @@
+uuid: 9bc0e781-2003-459b-91a5-f49f10f19f72
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.test_pagina_marcel.body
+    - node.type.test_pagina_marcel
+  module:
+    - user
+id: node.test_pagina_marcel.teaser
+targetEntityType: node
+bundle: test_pagina_marcel
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  langcode: true
