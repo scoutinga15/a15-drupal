@@ -74,77 +74,34 @@ global-styling:
 
 If you wish to install FontAwesome or Glyphicons from the CDN - just grab their URLs and follow the steps described in previous chapter about Google Fonts. You'll find a FontAwesome example in **droopler_subtheme.libraries.yml** and **droopler_subtheme.info.yml**.
 
-## Docker setup ##
-
-Start nginx-proxy with the three additional volumes declared
+## Local development ##
 
 ```shell
-docker run --detach \
-    --name nginx-proxy \
-    --publish 80:80 \
-    --publish 443:443 \
-    --volume /mnt/volume_ams3_01/proxy/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro \
-    --volume /mnt/volume_ams3_01/proxy/certs:/etc/nginx/certs \
-    --volume /mnt/volume_ams3_01/proxy/vhost:/etc/nginx/vhost.d \
-    --volume /mnt/volume_ams3_01/proxy/html:/usr/share/nginx/html \
-    --volume /var/run/docker.sock:/tmp/docker.sock:ro \
-    nginxproxy/nginx-proxy
+cp local.env .env      # first time only
+make build             # build and start the containers (http://localhost:8081)
+make live-db-pull      # replace the local database with a copy of live
+make help              # all targets
 ```
 
-Step 2 - acme-companion
+`config/sync` and `web/modules/custom` are mounted into the container, so `make cex` / `make cim` work on the repository directly.
+
+## Deployment ##
+
+Live runs with Docker Compose on `94.130.98.128` in `/root/projects/a15-drupal`, behind nginx-proxy-manager on the external `npm` network. The server's `.env` holds the database settings, `DRUPAL_FILES_PUBLIC` and `DRUPAL_SMTP_PASSWORD`.
+
 ```shell
-docker run --detach \
-    --name nginx-proxy-acme \
-    --volumes-from nginx-proxy \
-    --volume /var/run/docker.sock:/var/run/docker.sock:ro \
-    --volume /mnt/volume_ams3_01/proxy/acme:/etc/acme.sh \
-    --env "DEFAULT_EMAIL=dev@j3ll3.nl" \
-    nginxproxy/acme-companion
+make live-cex                 # pull admin changes from live into config/sync first
+make deploy REF=master        # backup, maintenance mode, build, updb, cim
+make live-status              # deployed commit, Drupal status, pending updates/config
 ```
 
-Drupal
-```shell
-docker run --detach \
-    --name drupal \
-    --env "VIRTUAL_HOST=nieuw.scoutinga15.nl" \
-    --env "LETSENCRYPT_HOST=nieuw.scoutinga15.nl" \
-    drupal
-```
+`make deploy` refuses to run when `DRUPAL_SMTP_PASSWORD` is missing from the server's `.env`. Every deploy saves a database dump in `backups/`. When a deploy fails, the site stays in maintenance mode; restore the backup or fix and deploy again.
 
-Volumes
-- assets
-- modules
-- profiles
-- themes
-
-`scp -rp files root@159.65.196.174:/mnt/volume_ams3_01/a15/drupal-files `
-
-## Portainer ##
+## Backups ##
 
 ```shell
-docker run -d --name portainer \
-    --restart=always \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v portainer_data:/data \
-    --env "VIRTUAL_HOST=portainer.j3host.nl" \
-    --env "LETSENCRYPT_HOST=portainer.j3host.nl" \
-    --env "VIRTUAL_PORT=9000" \
-    portainer/portainer-ce:latest
-```
-
-## Files and database ##
-
-SCP files to server
-```shell
-scp -rp files root@159.65.196.174:/mnt/volume_ams3_01/a15/drupal-files
-```
-
-sql dump
-```shell
-drush sql-dump > ./a15-local-$(date +%Y-%m-%d-%H.%M.%S).sql
-```
-
-gzip sql
-```shell
-drush sql-dump | gzip -9 > ./a15-local-$(date +%Y-%m-%d-%H.%M.%S).sql
+make live-backup              # live database  -> backups/live-db-<date>.sql.gz
+make live-files-backup        # live files     -> backups/live-files-<date>.tgz
+make db-backup                # local database -> backups/local-db-<date>.sql.gz
+make db-restore FILE=backups/<dump>.sql.gz
 ```

@@ -8,5 +8,6 @@ _core:
   default_config_hash: 6jyZpi-Rbz5tuCYrKC4wgiMhZU4-Lk86Y__MT6W181M
 id: media.carousel_item
 label: 'Carousel Item'
+description: ''
 targetEntityType: media
 cache: true

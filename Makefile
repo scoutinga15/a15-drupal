@@ -1,40 +1,132 @@
+.PHONY: help up down build shell drush cr updb cex cim test \
+	upgrade db-backup db-restore \
+	live-status live-backup live-files-backup live-cex live-db-pull deploy
 
-.PHONY: up down build shell drush install cr test help
+# Local environment
+DC     := docker compose -f docker-compose.yml -f docker-compose.override.yml
+DRUSH  := $(DC) exec -T drupal vendor/bin/drush
 
-# Default target
-help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@echo "  up        Start the project containers in the background"
-	@echo "  down      Stop and remove the project containers"
-	@echo "  build     Build and start the project containers"
-	@echo "  shell     Enter the drupal container shell"
-	@echo "  drush     Run a drush command (e.g., make drush cmd=status)"
-	@echo "  install   Install composer dependencies inside the container"
-	@echo "  cr        Clear Drupal cache"
-	@echo "  test      Run PHPUnit tests"
+# Live environment (override on the command line, e.g. make deploy LIVE_HOST=user@host)
+LIVE_HOST ?= root@94.130.98.128
+LIVE_DIR  ?= /root/projects/a15-drupal
+LIVE_DC   ?= docker compose -f docker-compose.yml
+LIVE_CTR  ?= a15-drupal-drupal-1
+LIVE_SSH  := ssh $(LIVE_HOST)
+LIVE_DRUSH := $(LIVE_SSH) docker exec $(LIVE_CTR) vendor/bin/drush
 
-up:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+# Git ref (branch, tag or commit) to deploy
+REF ?= master
 
-down:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+BACKUP_DIR := backups
+STAMP      := $(shell date +%Y%m%d-%H%M%S)
+SYNC_DIR   := config/sync
 
-build:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --build
+help: ## Show this help
+	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
-shell:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal bash
+## --- Local -------------------------------------------------------------------
 
-drush:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal vendor/bin/drush $(cmd)
+up: ## Start the local containers
+	$(DC) up -d
 
-install:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal composer install
+down: ## Stop and remove the local containers
+	$(DC) down
 
-cr:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal vendor/bin/drush cr
+build: ## Build and start the local containers
+	$(DC) up -d --build
 
-test:
-	docker-compose -f docker-compose.yml -f docker-compose.override.yml exec drupal ./vendor/bin/phpunit tests/
+shell: ## Open a shell in the local drupal container
+	$(DC) exec drupal bash
+
+drush: ## Run a drush command locally (make drush cmd="status")
+	$(DRUSH) $(cmd)
+
+cr: ## Clear the local Drupal cache
+	$(DRUSH) cr
+
+updb: ## Run pending database updates locally
+	$(DRUSH) updb -y
+
+cex: ## Export local configuration to config/sync
+	$(DRUSH) cex -y
+
+cim: ## Import config/sync into the local site
+	$(DRUSH) cim -y
+
+test: ## Run PHPUnit tests
+	$(DC) exec drupal ./vendor/bin/phpunit tests/
+
+upgrade: ## Update composer packages (make upgrade pkg="drupal/core-*"), rebuild, run updates and export config
+	docker run --rm -v "$(CURDIR)":/app -w /app composer:2 update $(pkg) -W --no-install --ignore-platform-req='ext-*'
+	$(DC) up -d --build
+	$(DRUSH) updb -y
+	$(DRUSH) cex -y
+	@echo "Review 'git diff' (composer.lock and config/sync) before committing."
+
+db-backup: ## Dump the local database to backups/
+	@mkdir -p $(BACKUP_DIR)
+	$(DRUSH) sql-dump --gzip > $(BACKUP_DIR)/local-db-$(STAMP).sql.gz
+	gunzip -t $(BACKUP_DIR)/local-db-$(STAMP).sql.gz
+	@echo "Saved $(BACKUP_DIR)/local-db-$(STAMP).sql.gz"
+
+db-restore: ## Replace the local database with a dump (make db-restore FILE=backups/x.sql.gz)
+	@test -f "$(FILE)" || { echo "Usage: make db-restore FILE=backups/<dump>.sql.gz"; exit 1; }
+	$(DRUSH) sql-drop -y
+	gunzip -c "$(FILE)" | $(DRUSH) sql-cli
+	$(DRUSH) cr
+
+## --- Live --------------------------------------------------------------------
+
+live-status: ## Show the deployed commit and Drupal status on live
+	$(LIVE_SSH) 'cd $(LIVE_DIR) && git log -1 --format="%h %ad %s" --date=short'
+	$(LIVE_DRUSH) status --fields=drupal-version,php-version,db-status,bootstrap
+	$(LIVE_DRUSH) updatedb:status
+	$(LIVE_DRUSH) config:status
+
+live-backup: ## Dump the live database to backups/
+	@mkdir -p $(BACKUP_DIR)
+	$(LIVE_DRUSH) sql-dump --gzip > $(BACKUP_DIR)/live-db-$(STAMP).sql.gz
+	gunzip -t $(BACKUP_DIR)/live-db-$(STAMP).sql.gz
+	@echo "Saved $(BACKUP_DIR)/live-db-$(STAMP).sql.gz"
+
+live-files-backup: ## Download the live public files to backups/
+	@mkdir -p $(BACKUP_DIR)
+	$(LIVE_SSH) 'docker exec $(LIVE_CTR) tar -C /opt/drupal/web/sites/default/files --exclude=./php --exclude=./css --exclude=./js --exclude=./styles -cz .' > $(BACKUP_DIR)/live-files-$(STAMP).tgz
+	gzip -t $(BACKUP_DIR)/live-files-$(STAMP).tgz
+	@echo "Saved $(BACKUP_DIR)/live-files-$(STAMP).tgz"
+
+live-cex: ## Export live configuration into config/sync (review with git diff)
+	@rm -rf $(BACKUP_DIR)/.cex-live && mkdir -p $(BACKUP_DIR)/.cex-live
+	$(LIVE_SSH) 'docker exec $(LIVE_CTR) sh -c "rm -rf /tmp/cex-live && vendor/bin/drush config:export --destination=/tmp/cex-live -y >/dev/null && tar -C /tmp/cex-live -cz . && rm -rf /tmp/cex-live"' | tar -xz -C $(BACKUP_DIR)/.cex-live
+	@# Webforms are excluded by config_ignore, and passwords stay out of git.
+	rsync -a --delete --exclude='.htaccess' --exclude='webform.webform.*' $(BACKUP_DIR)/.cex-live/ $(SYNC_DIR)/
+	@sed -i.bak -E "s/^(    password: ).+/\1''/" $(SYNC_DIR)/swiftmailer.transport.yml 2>/dev/null; rm -f $(SYNC_DIR)/*.bak
+	@rm -rf $(BACKUP_DIR)/.cex-live
+	@git status --short $(SYNC_DIR)
+
+live-db-pull: live-backup ## Replace the local database with a fresh copy of live
+	$(MAKE) db-restore FILE=$(BACKUP_DIR)/live-db-$(STAMP).sql.gz
+
+deploy: ## Deploy REF (default master) to live: backup, build, updb, cim
+	@git fetch -q origin
+	@git rev-parse -q --verify "origin/$(REF)^{commit}" >/dev/null || git rev-parse -q --verify "$(REF)^{commit}" >/dev/null \
+		|| { echo "Unknown ref '$(REF)'. Push it first."; exit 1; }
+	@$(LIVE_SSH) 'grep -q "^DRUPAL_SMTP_PASSWORD=." $(LIVE_DIR)/.env' \
+		|| { echo "DRUPAL_SMTP_PASSWORD is missing in $(LIVE_DIR)/.env on live; mail would stop working."; exit 1; }
+	$(MAKE) live-backup STAMP=$(STAMP)
+	$(LIVE_SSH) 'set -e; cd $(LIVE_DIR); \
+		git fetch -q origin; \
+		commit=$$(git rev-parse -q --verify "origin/$(REF)^{commit}" || git rev-parse --verify "$(REF)^{commit}"); \
+		echo "Deploying $$commit"; \
+		docker exec $(LIVE_CTR) vendor/bin/drush state:set system.maintenance_mode 1 --input-format=integer; \
+		git checkout -q --detach "$$commit"; \
+		$(LIVE_DC) build drupal; \
+		$(LIVE_DC) up -d; \
+		until docker exec $(LIVE_CTR) vendor/bin/drush status --field=bootstrap 2>/dev/null | grep -q Successful; do sleep 2; done; \
+		docker exec $(LIVE_CTR) vendor/bin/drush updb -y; \
+		docker exec $(LIVE_CTR) vendor/bin/drush cim -y; \
+		docker exec $(LIVE_CTR) vendor/bin/drush cr; \
+		docker exec $(LIVE_CTR) vendor/bin/drush state:set system.maintenance_mode 0 --input-format=integer; \
+		docker exec $(LIVE_CTR) vendor/bin/drush cr' \
+		|| { echo "Deploy failed; the site is left in maintenance mode. Backup: $(BACKUP_DIR)/live-db-$(STAMP).sql.gz"; exit 1; }
+	@echo "Deployed $(REF). Backup: $(BACKUP_DIR)/live-db-$(STAMP).sql.gz"

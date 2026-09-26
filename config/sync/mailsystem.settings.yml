@@ -1,6 +1,5 @@
 _core:
   default_config_hash: IhwTepsVwtbtbcT5GzQKhCXDCRvbk3MNkWqPiuiZ10s
-langcode: nl
 theme: current
 defaults:
   sender: symfony_mailer_lite

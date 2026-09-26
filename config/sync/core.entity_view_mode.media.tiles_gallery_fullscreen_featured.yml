@@ -8,5 +8,6 @@ _core:
   default_config_hash: PzMLCBndiGRA534BmEpF356v_4_eYuWmerNjpN0rYSk
 id: media.tiles_gallery_fullscreen_featured
 label: 'Tiles gallery fullscreen featured'
+description: ''
 targetEntityType: media
 cache: true

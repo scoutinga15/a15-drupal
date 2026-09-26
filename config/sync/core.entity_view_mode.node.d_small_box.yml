@@ -8,5 +8,6 @@ _core:
   default_config_hash: i8cBgAVKY4IMtFN3kyziMaY9eVpw22ZhPD54fiej9k4
 id: node.d_small_box
 label: 'Small Box'
+description: ''
 targetEntityType: node
 cache: true

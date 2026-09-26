@@ -19,32 +19,29 @@
         }
     },
     "require": {
-        "composer/installers": "^1.2",
+        "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
-        "droptica/droopler": "8.3.2.0-rc1",
-        "drupal/config_ignore": "^2.3",
-        "drupal/core-composer-scaffold": "~9.5.11",
-        "drupal/core-recommended": "~9.5.11",
-        "drupal/entity_usage": "^2.0@beta",
-        "drupal/gin": "^3.0",
-        "drupal/gin_login": "^1.0",
-        "drupal/gin_toolbar": "^1.0@beta",
-        "drupal/honeypot": "^2.0",
-        "drupal/signaturefield": "^1.0",
-        "drupal/swiftmailer": "^2.1",
-        "drupal/symfony_mailer_lite": "^1.0.7",
-        "drupal/tome": "^1.4",
-        "drupal/webform": "^6.1",
-        "drush/drush": "^11.0",
-        "oomphinc/composer-installers-extender": "^2.0"
+        "droptica/droopler": "8.3.3.0",
+        "drupal/config_ignore": "^2.4",
+        "drupal/core-composer-scaffold": "^10.5",
+        "drupal/core-recommended": "^10.5",
+        "drupal/entity_usage": "^2.0@beta || ^4.0",
+        "drupal/gin": "^3.0 || ^4.0",
+        "drupal/gin_login": "^2.0",
+        "drupal/gin_toolbar": "^1.0 || ^2.0",
+        "drupal/honeypot": "^2.1",
+        "drupal/signaturefield": "^1.1",
+        "drupal/symfony_mailer_lite": "^2.0",
+        "drupal/tome": "^1.12",
+        "drupal/we_megamenu": "1.16.0",
+        "drupal/webform": "^6.2",
+        "drush/drush": "^13.0",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "twig/twig": "~3.29.0"
     },
     "require-dev": {
-        "deployer/deployer": "*",
-        "drupal/core-dev": "~9.5.11",
-        "drupal/devel": "^4.0"
-    },
-    "provide": {
-        "drupal/contact": "9.5.11"
+        "drupal/core-dev": "^10.5",
+        "drupal/devel": "^5.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -63,10 +60,7 @@
             "phpstan/extension-installer": true
         },
         "platform": {
-            "php": "8.1"
-        },
-        "audit": {
-            "block-insecure": false
+            "php": "8.3"
         }
     },
     "extra": {
@@ -113,15 +107,6 @@
                 "type:drupal-custom-theme"
             ]
         },
-        "enable-patching": true,
-        "patches-ignore": {
-            "droptica/droopler": {
-                "drupal/we_megamenu": [
-                    "web/profiles/contrib/droopler/patches/we_megamenu_compatibility_php81.patch",
-                    "https://www.drupal.org/files/issues/2022-08-12/we_megamenu-3296290-5.patch",
-                    "https://www.drupal.org/files/issues/2022-02-24/we_megamenu_deprecated.patch"
-                ]
-            }
-        }
+        "enable-patching": true
     }
 }

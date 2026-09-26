@@ -29,6 +29,7 @@ settings:
   default_form_submit_back: false
   default_form_details_toggle: true
   default_form_file_limit: ''
+  default_form_file_limit_message: "This form's file upload quota of %quota has been exceeded. Please remove some files."
   default_wizard_prev_button_label: '< Vorige'
   default_wizard_next_button_label: 'Volgende >'
   default_wizard_start_label: Begin
@@ -39,7 +40,7 @@ settings:
   default_preview_prev_button_label: '< Vorige'
   default_preview_label: Preview
   default_preview_title: '[webform:title]: Voorbeeldweergave'
-  default_preview_message: 'Controleer uw inzending. Uw inzending is niet voltooid, totdat u klikt op de ''Indienen''-knop.'
+  default_preview_message: "Controleer uw inzending. Uw inzending is niet voltooid, totdat u klikt op de 'Indienen'-knop."
   default_draft_button_label: 'Conceptversie opslaan'
   default_draft_saved_message: 'Inzending opgeslagen. U kunt op een later tijdstip naar dit formulier terugkeren waarbij de huidige waardes zullen worden hersteld.'
   default_draft_loaded_message: 'Er is een gedeeltelijk ingevuld formulier gevonden, voltooi de overgebleven delen.'
@@ -321,7 +322,6 @@ libraries:
 requirements:
   cdn: true
   clientside_validation: true
-  bootstrap: true
   spam: true
 third_party_settings:
   captcha:

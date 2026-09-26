@@ -4,6 +4,7 @@ services:
       - 8081:80
     volumes:
       - ./web/modules/custom:/opt/drupal/web/modules/custom
+      - ./config:/opt/drupal/config
   mysql:
     image: mysql:8
     ports:

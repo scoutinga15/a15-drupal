@@ -1,10 +1,3 @@
 {
-  "patches": {
-    "drupal/honeypot": {
-      "Skip update 8102 when id column exists (added by old 2943526 patch)": "patches/honeypot-update-8102-skip-existing-id.patch"
-    },
-    "drupal/advagg": {
-      "jshrink not working in php 8.0": "https://www.drupal.org/files/issues/2021-12-03/advagg-jshrink-update.3252394-1.patch"
-    }
-  }
+  "patches": {}
 }

@@ -38,3 +38,6 @@ drupal_config
 .env
 *.sql
 *.sql.gz
+
+# Local and live backups (make db-backup / live-backup)
+/backups/

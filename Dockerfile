@@ -1,4 +1,4 @@
-FROM php:8.1-apache-bookworm
+FROM php:8.3-apache-bookworm
 
 # install the PHP extensions we need
 RUN set -eux; \
@@ -83,7 +83,6 @@ COPY drush drush/
 COPY composer.json .
 COPY composer.lock .
 COPY composer.patches.json .
-COPY patches patches/
 COPY web/assets web/assets/
 COPY web/themes web/themes/
 

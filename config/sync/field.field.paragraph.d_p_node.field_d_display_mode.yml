@@ -23,5 +23,5 @@ settings:
   exclude:
     d_small_box: d_small_box
     teaser: teaser
-  negate: 1
+  negate: true
 field_type: entity_reference_display

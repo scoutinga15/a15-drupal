@@ -1,6 +1,5 @@
 _core:
   default_config_hash: LdFXnqGZBU8cKkP-46Q6Oq82uMdt6neBwxdcV8aCOaI
-langcode: nl
 max_links: 2000
 cron_generate: true
 cron_generate_interval: 0

@@ -6,5 +6,5 @@ _core:
   default_config_hash: hXfaesS_m1Kd6I9AmrSEpoELdnJSRsNe8yDxSGRP64c
 id: d_paragraph_block
 label: 'Paragraph block'
-revision: 0
+revision: false
 description: 'Block type with ability to add paragraphs as content.'

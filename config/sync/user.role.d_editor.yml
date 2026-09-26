@@ -49,6 +49,7 @@ permissions:
   - 'delete content translations'
   - 'delete content_page revisions'
   - 'delete own content_page content'
+  - 'delete own files'
   - 'delete terms in tags'
   - 'edit any content_page content'
   - 'edit any d_document media'

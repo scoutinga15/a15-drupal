@@ -8,5 +8,6 @@ _core:
   default_config_hash: VBqZGW4EtxYklZNwH1auE6svc9Du7EUaDe4Kv3Xp7QQ
 id: media.d_icon
 label: Pictogram
+description: ''
 targetEntityType: media
 cache: true

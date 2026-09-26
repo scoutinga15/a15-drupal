@@ -8,3 +8,4 @@ name: Labels
 vid: tags
 description: 'Gebruik tags om artikelen over vergelijkbare onderwerpen in categorieën te groeperen.'
 weight: 0
+new_revision: false
