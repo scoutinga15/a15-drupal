@@ -56,12 +56,12 @@ class BookingAdminController extends ControllerBase {
 
     // Filter by status if provided in the query string.
     $status_filter = \Drupal::request()->query->get('status');
-    if ($status_filter !== NULL && $status_filter !== '') {
+    if ($status_filter !== NULL && $status_filter !== '' && $status_filter !== 'all') {
       $query->condition('status', $status_filter);
     }
-    // Default filter by booked slots (booked and reserved) if no status filter is provided.
+    // Default filter by booked slots if no status filter is provided.
     elseif (!\Drupal::request()->query->has('status')) {
-      $query->condition('status', ['booked', 'reserved'], 'IN');
+      $query->condition('status', 'booked');
     }
 
     // Default sort by upcoming dates ascending if no sort is specified.

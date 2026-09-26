@@ -31,13 +31,13 @@ class BookingFilterForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Status'),
       '#options' => [
-        '' => $this->t('- All -'),
+        'all' => $this->t('- All -'),
         'free' => $this->t('Free'),
         'requested' => $this->t('Requested'),
         'reserved' => $this->t('Reserved'),
         'booked' => $this->t('Booked'),
       ],
-      '#default_value' => \Drupal::request()->query->get('status', ''),
+      '#default_value' => \Drupal::request()->query->get('status', 'booked'),
     ];
 
     $form['filters']['actions'] = [
@@ -65,8 +65,13 @@ class BookingFilterForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $status = $form_state->getValue('status');
     $query = [];
-    if ($status !== '') {
+    if ($status !== 'all') {
       $query['status'] = $status;
+    }
+    else {
+      // Use a special value to explicitly mean "all" if needed,
+      // or just leave it empty if the controller handles it.
+      $query['status'] = 'all';
     }
     $form_state->setRedirect('clubhouse_booking.admin_slots', [], ['query' => $query]);
   }

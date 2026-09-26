@@ -13,6 +13,13 @@ clubhouse_booking.slots:
   requirements:
     _permission: 'access content'
 
+clubhouse_booking.holidays:
+  path: '/api/clubhouse/holidays'
+  defaults:
+    _controller: '\Drupal\clubhouse_booking\Controller\BookingController::getHolidays'
+  requirements:
+    _permission: 'access content'
+
 clubhouse_booking.book:
   path: '/clubhouse/book/{slot_id}'
   defaults:

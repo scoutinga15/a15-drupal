@@ -117,4 +117,91 @@ class BookingController extends ControllerBase {
     return new JsonResponse($events);
   }
 
+  /**
+   * API endpoint to get Dutch holidays.
+   */
+  public function getHolidays() {
+    $year = \Drupal::request()->query->get('year') ?: date('Y');
+    $holidays = $this->calculateDutchHolidays($year);
+
+    $events = [];
+    foreach ($holidays as $date => $name) {
+      $events[] = [
+        'title' => $name,
+        'start' => $date,
+        'allDay' => TRUE,
+        'display' => 'background',
+        'color' => 'orange',
+        'textColor' => '#fff',
+        'classNames' => ['dutch-holiday'],
+      ];
+    }
+
+    return new JsonResponse($events);
+  }
+
+  /**
+   * Calculates Dutch holidays for a given year.
+   */
+  protected function calculateDutchHolidays($year) {
+    $holidays = [];
+
+    // Fixed dates
+    $holidays["$year-01-01"] = $this->t('Nieuwjaarsdag');
+    $holidays["$year-04-27"] = $this->t('Koningsdag');
+    $holidays["$year-05-05"] = $this->t('Bevrijdingsdag');
+    $holidays["$year-12-25"] = $this->t('Eerste Kerstdag');
+    $holidays["$year-12-26"] = $this->t('Tweede Kerstdag');
+
+    // Easter-related dates
+    $easter_timestamp = $this->getEasterDate($year);
+
+    $format = 'Y-m-d';
+    $good_friday = date($format, strtotime('-2 days', $easter_timestamp));
+    $easter_sunday = date($format, $easter_timestamp);
+    $easter_monday = date($format, strtotime('+1 day', $easter_timestamp));
+    $ascension_day = date($format, strtotime('+39 days', $easter_timestamp));
+    $whit_sunday = date($format, strtotime('+49 days', $easter_timestamp));
+    $whit_monday = date($format, strtotime('+50 days', $easter_timestamp));
+
+    $holidays[$good_friday] = $this->t('Goede Vrijdag');
+    $holidays[$easter_sunday] = $this->t('Eerste Paasdag');
+    $holidays[$easter_monday] = $this->t('Tweede Paasdag');
+    $holidays[$ascension_day] = $this->t('Hemelvaartsdag');
+    $holidays[$whit_sunday] = $this->t('Eerste Pinksterdag');
+    $holidays[$whit_monday] = $this->t('Tweede Pinksterdag');
+
+    ksort($holidays);
+    return $holidays;
+  }
+
+  /**
+   * Calculates the Unix timestamp for Easter Sunday for a given year.
+   *
+   * Fallback for easter_date() which requires the 'calendar' PHP extension.
+   */
+  protected function getEasterDate($year) {
+    if (function_exists('easter_date')) {
+      return easter_date($year);
+    }
+
+    // Gauss's algorithm for calculating Easter.
+    $a = $year % 19;
+    $b = floor($year / 100);
+    $c = $year % 100;
+    $d = floor($b / 4);
+    $e = $b % 4;
+    $f = floor(($b + 8) / 25);
+    $g = floor(($b - $f + 1) / 3);
+    $h = (19 * $a + $b - $d - $g + 15) % 30;
+    $i = floor($c / 4);
+    $k = $c % 4;
+    $l = (32 + 2 * $e + 2 * $i - $h - $k) % 7;
+    $m = floor(($a + 11 * $h + 22 * $l) / 451);
+    $month = floor(($h + $l - 7 * $m + 114) / 31);
+    $day = (($h + $l - 7 * $m + 114) % 31) + 1;
+
+    return mktime(0, 0, 0, $month, $day, $year);
+  }
+
 }

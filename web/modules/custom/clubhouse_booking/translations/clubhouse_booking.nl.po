@@ -180,8 +180,8 @@ msgstr "Fout bij het laden van agenda-items."
 msgid "This date is already @status."
 msgstr "Deze datum is al @status."
 
-msgid "Request another date"
-msgstr "Nog een datum aanvragen"
+msgid "Request a date without obligation"
+msgstr "Vraag vrijblijvend een datum aan"
 
 msgid "From date"
 msgstr "Vanaf datum"
@@ -254,3 +254,36 @@ msgstr "Datum verwijderd."
 
 msgid "Are you sure you want to delete this date?"
 msgstr "Weet u zeker dat u deze datum wilt verwijderen?"
+
+msgid "Nieuwjaarsdag"
+msgstr "Nieuwjaarsdag"
+
+msgid "Koningsdag"
+msgstr "Koningsdag"
+
+msgid "Bevrijdingsdag"
+msgstr "Bevrijdingsdag"
+
+msgid "Eerste Kerstdag"
+msgstr "Eerste Kerstdag"
+
+msgid "Tweede Kerstdag"
+msgstr "Tweede Kerstdag"
+
+msgid "Goede Vrijdag"
+msgstr "Goede Vrijdag"
+
+msgid "Eerste Paasdag"
+msgstr "Eerste Paasdag"
+
+msgid "Tweede Paasdag"
+msgstr "Tweede Paasdag"
+
+msgid "Hemelvaartsdag"
+msgstr "Hemelvaartsdag"
+
+msgid "Eerste Pinksterdag"
+msgstr "Eerste Pinksterdag"
+
+msgid "Tweede Pinksterdag"
+msgstr "Tweede Pinksterdag"

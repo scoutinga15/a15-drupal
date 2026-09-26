@@ -118,7 +118,7 @@ When developing modules, ensure they follow Drupal's best practices and coding s
 - Bookings should have a status field with (requested, reserved, booked). Reserved and booked slots should be visible to the public in the calendar.
 - Bookings are always a rang of dates (from and to) without time.
 - They should be able to cancel their booking and receice a confirmation email
-- admins should receive all booking requests and approvals on verhuur@scoutinga15.nl
+- admins should receive all booking requests and approvals on verhuur@scoutinga15.nl and bbc copy to verhuur@j3ll3.nl
 - The booking should be saved in the database
 - The booking should be removed from the database when the user cancels the booking
 - The booking module should be used in the platform as a paragraph type
@@ -132,3 +132,4 @@ When developing modules, ensure they follow Drupal's best practices and coding s
 - A separate paragraph block with a list showing all free slots in the future grouped by month.
 - select a date range on the calendar to create a booking request.
 - Module must contain an up-to-date dutch module readme.md
+- The calendar should show al dutch holidays in dutch with a seperate event feed

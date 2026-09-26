@@ -4,7 +4,8 @@
       $(context).find('#calendar').once('clubhouseBookingCalendar').each(function () {
         var calendarEl = this;
         var locale = drupalSettings.clubhouseBooking ? drupalSettings.clubhouseBooking.language : 'nl';
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        var calendar;
+        calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'multiMonthYear',
           locale: locale,
           selectable: true,
@@ -23,13 +24,35 @@
 
             window.location.href = '/clubhouse/request-custom-slot?start=' + start + '&end=' + end;
           },
-          events: {
-            url: '/api/clubhouse/slots',
-            failure: function () {
-              alert(Drupal.t('Failed to load calendar events.'));
+          eventSources: [
+            {
+              url: '/api/clubhouse/slots',
+              failure: function () {
+                alert(Drupal.t('Failed to load calendar events.'));
+              }
+            },
+            {
+              url: '/api/clubhouse/holidays',
+              method: 'GET',
+              extraParams: function() {
+                var year = new Date().getFullYear();
+                if (calendar) {
+                  year = calendar.getDate().getFullYear();
+                }
+                return {
+                  year: year
+                };
+              },
+              color: '#f0f0f0',
+              textColor: '#999',
+              display: 'background'
             }
-          },
+          ],
           eventClick: function (info) {
+            // Do nothing for holidays.
+            if (info.event.display === 'background') {
+              return;
+            }
             var status = info.event.extendedProps.status;
             if (status === 'free') {
               window.location.href = '/clubhouse/book/' + info.event.id;
@@ -45,7 +68,7 @@
         calendar.render();
 
         // Add Request Custom Slot button below the calendar
-        var $requestButton = $('<div class="calendar-actions"><a href="/clubhouse/request-custom-slot" class="button">' + Drupal.t('Request another date') + '</a></div>');
+        var $requestButton = $('<div class="calendar-actions"><a href="/clubhouse/request-custom-slot" class="button">' + Drupal.t('Request a date without obligation') + '</a></div>');
         $(calendarEl).before($requestButton);
       });
     }

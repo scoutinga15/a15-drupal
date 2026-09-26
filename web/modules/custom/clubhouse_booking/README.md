@@ -6,6 +6,7 @@ De `clubhouse_booking` module is een aangepaste Drupal-oplossing voor het verhur
 
 ### Voor Gasten
 - **Interactieve Kalender**: Een FullCalendar-weergave waarop vrije en geboekte periodes zichtbaar zijn.
+- **Nederlandse Feestdagen**: De kalender toont alle Nederlandse feestdagen in het Nederlands via een aparte event-feed.
 - **Boekingen**: Gasten kunnen direct vrije slots boeken of een aangepaste periode aanvragen via een formulier.
 - **Annuleren**: Gasten kunnen hun boeking annuleren en ontvangen hiervan een bevestigingsmail.
 - **Vrije Slots Lijst**: Een overzichtelijk blok (Paragraph) dat alle toekomstige vrije slots gegroepeerd per maand toont.
