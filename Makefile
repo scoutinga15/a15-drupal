@@ -80,7 +80,8 @@ db-restore: ## Replace the local database with a dump (make db-restore FILE=back
 	@test -f "$(FILE)" || { echo "Usage: make db-restore FILE=backups/<dump>.sql.gz"; exit 1; }
 	$(DRUSH) sql-drop -y
 	gunzip -c "$(FILE)" | $(DRUSH) sql-cli
-	$(DRUSH) cr
+	@# No cache rebuild: with code of another Drupal version it breaks the restored site.
+	@echo "Restored $(FILE). Run 'make cr' if the dump comes from the same code version."
 
 ## --- Live --------------------------------------------------------------------
 
@@ -143,6 +144,7 @@ deploy: release ## Deploy REF (default master) to live: backup, sync, build, upd
 		until docker exec $(LIVE_CTR) vendor/bin/drush status --field=bootstrap 2>/dev/null | grep -q Successful; do sleep 2; done; \
 		docker exec $(LIVE_CTR) vendor/bin/drush updb -y; \
 		docker exec $(LIVE_CTR) vendor/bin/drush cim -y; \
+		docker exec $(LIVE_CTR) vendor/bin/drush simple-sitemap:generate; \
 		docker exec $(LIVE_CTR) vendor/bin/drush cr; \
 		docker exec $(LIVE_CTR) vendor/bin/drush state:set system.maintenance_mode 0 --input-format=integer; \
 		docker exec $(LIVE_CTR) vendor/bin/drush cr'; } \

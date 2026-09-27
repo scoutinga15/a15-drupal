@@ -43,11 +43,18 @@ The upgrade has two commits on `feature/update-drupal`, and **each one is deploy
 1. **SMTP password on the server.** Done on 2026-09-27: `DRUPAL_SMTP_PASSWORD` was added to `/root/projects/a15-drupal/.env` with the password live used at that time (backup: `.env.bak-20260926-224802`). That password is also in git history, so change it at one.com and update `.env` afterwards. `make deploy` refuses to run when the variable is missing.
 2. **Preview the changes.** `make deploy-dry-run REF=b457418` lists the files a deploy would change or delete on the server, without changing anything.
 3. **Export live config.** If anything was changed in the admin UI since the export on 2026-09-27, it would be overwritten by `cim`. Run `make live-cex` and check `git diff config/sync`; commit real changes to both steps (rebase) before deploying.
-4. **Rehearse locally with live data.**
+4. **Rehearse locally with live data.** Done on 2026-09-27 with a fresh live dump: both steps ran without errors, config ended in sync, and all public, admin and booking pages worked. To repeat it, run each step with its own code, and load the dump while the step 1 code is running. A cache rebuild with Drupal 10 code on the 9.3 database breaks it (`Route "webform.addons" does not exist`).
    ```shell
-   make live-db-pull                   # live database -> local
-   git checkout b457418 && make build && make updb && make cim
-   git checkout feature/update-drupal && make build && make updb && make cim
+   make live-backup                                   # backups/live-db-<date>.sql.gz
+   git worktree add ../a15-step1 b457418 && cp .env ../a15-step1/
+   cd ../a15-step1
+   dc() { docker compose -p a15-drupal -f docker-compose.yml -f docker-compose.override.yml "$@"; }
+   dc up -d --build drupal
+   dc exec -T drupal vendor/bin/drush sql:drop -y
+   gunzip -c ../a15-drupal/backups/live-db-<date>.sql.gz | dc exec -T drupal vendor/bin/drush sql:cli
+   dc exec -T drupal vendor/bin/drush updb -y && dc exec -T drupal vendor/bin/drush cim -y
+   cd ../a15-drupal && git worktree remove ../a15-step1
+   make build && make updb && make cim && make drush cmd=simple-sitemap:generate && make cr
    ```
    Then check the site on http://localhost:8081 (see [Verify](#verify)).
 5. **Plan a quiet moment.** The site is in maintenance mode during each deploy; the image build takes a few minutes.
@@ -69,8 +76,10 @@ make live-status
 4. Turns on maintenance mode.
 5. Uploads the release with rsync (see [Server layout](#server-layout)).
 6. Rebuilds the image and restarts the containers.
-7. Runs `drush updb -y`, `drush cim -y` and `drush cr`.
+7. Runs `drush updb -y`, `drush cim -y`, `drush simple-sitemap:generate` and `drush cr`.
 8. Turns off maintenance mode.
+
+The sitemap is regenerated because the simple_sitemap updates in step 1 empty its table; without it, `/sitemap.xml` returns 404 until cron runs (every 3 hours on live).
 
 The first deploy also removes `web/modules/custom/clubhouse_booking/translations/nl.po` from the server: an old copy that was never in git and is not loaded (the module uses `clubhouse_booking.nl.po`).
 
