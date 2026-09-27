@@ -287,3 +287,18 @@ msgstr "Eerste Pinksterdag"
 
 msgid "Tweede Pinksterdag"
 msgstr "Tweede Pinksterdag"
+
+msgid "Request"
+msgstr "Aanvragen"
+
+msgid "Clubhouse Booking Calendar"
+msgstr "Clubhuis boekingskalender"
+
+msgid "Book a Slot"
+msgstr "Plek boeken"
+
+msgid "Cancel Booking"
+msgstr "Boeking annuleren"
+
+msgid "Manage clubhouse slots and bookings"
+msgstr "Beheer clubhuis plekken en boekingen"

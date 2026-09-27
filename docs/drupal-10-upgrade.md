@@ -76,7 +76,7 @@ make live-status
 4. Turns on maintenance mode.
 5. Uploads the release with rsync (see [Server layout](#server-layout)).
 6. Rebuilds the image and restarts the containers.
-7. Runs `drush updb -y`, `drush cim -y`, `drush simple-sitemap:generate` and `drush cr`.
+7. Runs `drush updb -y`, `drush cim -y`, imports the custom modules' Dutch `.po` files (`drush locale:import`, keeping translations edited in the admin), then `drush simple-sitemap:generate` and `drush cr`.
 8. Turns off maintenance mode.
 
 The sitemap is regenerated because the simple_sitemap updates in step 1 empty its table; without it, `/sitemap.xml` returns 404 until cron runs (every 3 hours on live).

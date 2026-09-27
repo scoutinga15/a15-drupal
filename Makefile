@@ -1,4 +1,4 @@
-.PHONY: help up down build shell drush cr updb cex cim test \
+.PHONY: help up down build shell drush cr updb cex cim translations test \
 	upgrade db-backup db-restore \
 	live-status live-backup live-files-backup live-cex live-db-pull release deploy-dry-run deploy
 
@@ -59,6 +59,13 @@ cex: ## Export local configuration to config/sync
 
 cim: ## Import config/sync into the local site
 	$(DRUSH) cim -y
+
+translations: ## Import the Dutch .po files of the custom modules (keeps admin-edited translations)
+	@for f in web/modules/custom/*/translations/*.nl.po; do [ -f "$$f" ] || continue; \
+		echo "Importing $$f"; \
+		$(DRUSH) locale:import nl "/opt/drupal/$$f" --type=not-customized --override=not-customized || exit 1; \
+	done
+	$(DRUSH) cr
 
 test: ## Run PHPUnit tests
 	$(DC) exec drupal ./vendor/bin/phpunit tests/
@@ -144,6 +151,9 @@ deploy: release ## Deploy REF (default master) to live: backup, sync, build, upd
 		until docker exec $(LIVE_CTR) vendor/bin/drush status --field=bootstrap 2>/dev/null | grep -q Successful; do sleep 2; done; \
 		docker exec $(LIVE_CTR) vendor/bin/drush updb -y; \
 		docker exec $(LIVE_CTR) vendor/bin/drush cim -y; \
+		for f in web/modules/custom/*/translations/*.nl.po; do [ -f "$$f" ] || continue; \
+			docker exec $(LIVE_CTR) vendor/bin/drush locale:import nl "/opt/drupal/$$f" --type=not-customized --override=not-customized; \
+		done; \
 		docker exec $(LIVE_CTR) vendor/bin/drush simple-sitemap:generate; \
 		docker exec $(LIVE_CTR) vendor/bin/drush cr; \
 		docker exec $(LIVE_CTR) vendor/bin/drush state:set system.maintenance_mode 0 --input-format=integer; \
