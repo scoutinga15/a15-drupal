@@ -104,7 +104,7 @@ The custom theme uses **Gulp** for asset compilation (SASS, JS).
 
 ### Deployment
 Deployment runs from the `Makefile` (run `make help` for all targets):
-- `make deploy REF=<branch|tag|commit>` backs up the live database, puts the site in maintenance mode, checks out REF on the server, rebuilds the image and runs `drush updb` and `drush cim`.
+- `make deploy REF=<branch|tag|commit>` backs up the live database, puts the site in maintenance mode, uploads REF with `git archive` + rsync (the server has no git checkout), rebuilds the image and runs `drush updb` and `drush cim`. Preview with `make deploy-dry-run`.
 - `make live-backup` / `make live-files-backup` download the live database / public files to `backups/`.
 - `make live-cex` exports the live configuration into `config/sync`; review it with `git diff` before committing.
 - Configuration in `config/sync` is the source of truth: `drush cim` on live overwrites changes made in the admin UI, so export them with `make live-cex` first.

@@ -87,13 +87,16 @@ make help              # all targets
 
 ## Deployment ##
 
-Live runs with Docker Compose on `94.130.98.128` in `/root/projects/a15-drupal`, behind nginx-proxy-manager on the external `npm` network. The server's `.env` holds the database settings, `DRUPAL_FILES_PUBLIC` and `DRUPAL_SMTP_PASSWORD`.
+Live runs with Docker Compose (both compose files) on `94.130.98.128` in `/root/projects/a15-drupal`, behind nginx-proxy-manager on the external `npm` network. That directory is not a git clone: `make deploy` exports the commit with `git archive` and uploads it with rsync. The server's `.env` holds the database settings, `DRUPAL_FILES_PUBLIC` and `DRUPAL_SMTP_PASSWORD`; public files are in `web/sites/default/files` there.
 
 ```shell
 make live-cex                 # pull admin changes from live into config/sync first
-make deploy REF=master        # backup, maintenance mode, build, updb, cim
+make deploy-dry-run REF=master  # list the files a deploy would change on the server
+make deploy REF=master        # backup, maintenance mode, sync, build, updb, cim
 make live-status              # deployed commit, Drupal status, pending updates/config
 ```
+
+The Drupal 9.3 → 10 upgrade is a two-step deploy: see [docs/drupal-10-upgrade.md](docs/drupal-10-upgrade.md).
 
 `make deploy` refuses to run when `DRUPAL_SMTP_PASSWORD` is missing from the server's `.env`. Every deploy saves a database dump in `backups/`. When a deploy fails, the site stays in maintenance mode; restore the backup or fix and deploy again.
 

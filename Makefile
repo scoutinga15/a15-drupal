@@ -1,6 +1,6 @@
 .PHONY: help up down build shell drush cr updb cex cim test \
 	upgrade db-backup db-restore \
-	live-status live-backup live-files-backup live-cex live-db-pull deploy
+	live-status live-backup live-files-backup live-cex live-db-pull release deploy-dry-run deploy
 
 # Local environment
 DC     := docker compose -f docker-compose.yml -f docker-compose.override.yml
@@ -9,13 +9,20 @@ DRUSH  := $(DC) exec -T drupal vendor/bin/drush
 # Live environment (override on the command line, e.g. make deploy LIVE_HOST=user@host)
 LIVE_HOST ?= root@94.130.98.128
 LIVE_DIR  ?= /root/projects/a15-drupal
-LIVE_DC   ?= docker compose -f docker-compose.yml
+LIVE_DC   ?= docker compose -f docker-compose.yml -f docker-compose.override.yml
 LIVE_CTR  ?= a15-drupal-drupal-1
 LIVE_SSH  := ssh $(LIVE_HOST)
 LIVE_DRUSH := $(LIVE_SSH) docker exec $(LIVE_CTR) vendor/bin/drush
 
 # Git ref (branch, tag or commit) to deploy
 REF ?= master
+
+# The commit is exported with git archive and rsynced into LIVE_DIR. Stale files
+# are only deleted in directories git fully owns; .env and data are never touched.
+RELEASE_DIR   := backups/.release
+MANAGED_DIRS  := config patches web/modules/custom web/themes/custom
+RSYNC_EXCLUDE := --exclude=/.env --exclude=/local.env \
+	--exclude=/backups/ --exclude='/web/sites/*/files/' --exclude='/web/sites/*/settings.local.php'
 
 BACKUP_DIR := backups
 STAMP      := $(shell date +%Y%m%d-%H%M%S)
@@ -78,8 +85,9 @@ db-restore: ## Replace the local database with a dump (make db-restore FILE=back
 ## --- Live --------------------------------------------------------------------
 
 live-status: ## Show the deployed commit and Drupal status on live
-	$(LIVE_SSH) 'cd $(LIVE_DIR) && git log -1 --format="%h %ad %s" --date=short'
-	$(LIVE_DRUSH) status --fields=drupal-version,php-version,db-status,bootstrap
+	@$(LIVE_SSH) 'cat $(LIVE_DIR)/REVISION 2>/dev/null || echo "No REVISION file: not deployed with make deploy yet"'
+	@$(LIVE_SSH) 'docker exec $(LIVE_CTR) php -r "echo \"PHP version      : \", PHP_VERSION, PHP_EOL;"'
+	$(LIVE_DRUSH) status --fields=drupal-version,drush-version,db-status,bootstrap
 	$(LIVE_DRUSH) updatedb:status
 	$(LIVE_DRUSH) config:status
 
@@ -107,19 +115,29 @@ live-cex: ## Export live configuration into config/sync (review with git diff)
 live-db-pull: live-backup ## Replace the local database with a fresh copy of live
 	$(MAKE) db-restore FILE=$(BACKUP_DIR)/live-db-$(STAMP).sql.gz
 
-deploy: ## Deploy REF (default master) to live: backup, build, updb, cim
-	@git fetch -q origin
-	@git rev-parse -q --verify "origin/$(REF)^{commit}" >/dev/null || git rev-parse -q --verify "$(REF)^{commit}" >/dev/null \
-		|| { echo "Unknown ref '$(REF)'. Push it first."; exit 1; }
+release: ## Export REF into backups/.release (used by deploy)
+	@commit=$$(git rev-parse -q --verify "$(REF)^{commit}") || { echo "Unknown ref '$(REF)'."; exit 1; }; \
+	rm -rf $(RELEASE_DIR) && mkdir -p $(RELEASE_DIR) && git archive "$$commit" | tar -x -C $(RELEASE_DIR) && \
+	git log -1 --format='%H %ad %s' --date=short "$$commit" > $(RELEASE_DIR)/REVISION && \
+	echo "Prepared $$(cat $(RELEASE_DIR)/REVISION)"
+
+deploy-dry-run: release ## Show which files a deploy of REF would change on live
+	rsync -azc -n -v $(RSYNC_EXCLUDE) $(RELEASE_DIR)/ $(LIVE_HOST):$(LIVE_DIR)/
+	@for d in $(MANAGED_DIRS); do [ -d $(RELEASE_DIR)/$$d ] || continue; \
+		echo "--- $$d (with --delete)"; \
+		rsync -azc -n -v --delete $(RELEASE_DIR)/$$d/ $(LIVE_HOST):$(LIVE_DIR)/$$d/ || exit 1; \
+	done
+
+deploy: release ## Deploy REF (default master) to live: backup, sync, build, updb, cim
 	@$(LIVE_SSH) 'grep -q "^DRUPAL_SMTP_PASSWORD=." $(LIVE_DIR)/.env' \
 		|| { echo "DRUPAL_SMTP_PASSWORD is missing in $(LIVE_DIR)/.env on live; mail would stop working."; exit 1; }
 	$(MAKE) live-backup STAMP=$(STAMP)
-	$(LIVE_SSH) 'set -e; cd $(LIVE_DIR); \
-		git fetch -q origin; \
-		commit=$$(git rev-parse -q --verify "origin/$(REF)^{commit}" || git rev-parse --verify "$(REF)^{commit}"); \
-		echo "Deploying $$commit"; \
-		docker exec $(LIVE_CTR) vendor/bin/drush state:set system.maintenance_mode 1 --input-format=integer; \
-		git checkout -q --detach "$$commit"; \
+	$(LIVE_DRUSH) state:set system.maintenance_mode 1 --input-format=integer
+	@{ rsync -azc $(RSYNC_EXCLUDE) $(RELEASE_DIR)/ $(LIVE_HOST):$(LIVE_DIR)/ && \
+	  for d in $(MANAGED_DIRS); do [ -d $(RELEASE_DIR)/$$d ] || continue; \
+	    rsync -azc --delete $(RELEASE_DIR)/$$d/ $(LIVE_HOST):$(LIVE_DIR)/$$d/ || exit 1; \
+	  done && \
+	  $(LIVE_SSH) 'set -e; cd $(LIVE_DIR); \
 		$(LIVE_DC) build drupal; \
 		$(LIVE_DC) up -d; \
 		until docker exec $(LIVE_CTR) vendor/bin/drush status --field=bootstrap 2>/dev/null | grep -q Successful; do sleep 2; done; \
@@ -127,6 +145,6 @@ deploy: ## Deploy REF (default master) to live: backup, build, updb, cim
 		docker exec $(LIVE_CTR) vendor/bin/drush cim -y; \
 		docker exec $(LIVE_CTR) vendor/bin/drush cr; \
 		docker exec $(LIVE_CTR) vendor/bin/drush state:set system.maintenance_mode 0 --input-format=integer; \
-		docker exec $(LIVE_CTR) vendor/bin/drush cr' \
+		docker exec $(LIVE_CTR) vendor/bin/drush cr'; } \
 		|| { echo "Deploy failed; the site is left in maintenance mode. Backup: $(BACKUP_DIR)/live-db-$(STAMP).sql.gz"; exit 1; }
-	@echo "Deployed $(REF). Backup: $(BACKUP_DIR)/live-db-$(STAMP).sql.gz"
+	@echo "Deployed $$(cat $(RELEASE_DIR)/REVISION). Backup: $(BACKUP_DIR)/live-db-$(STAMP).sql.gz"
